@@ -4,6 +4,8 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace Customer.Infrastructure.Settings;
 
 /// <summary>
@@ -14,5 +16,5 @@ public class AppSettings
     /// <summary>
     /// Gets or sets the external customer services.
     /// </summary>
-    public Dictionary<string, string> ExternalCustomerServices { get; set; }
+    public Dictionary<string, string> ExternalCustomerServices { get; set; } = new Dictionary<string, string>();
 }

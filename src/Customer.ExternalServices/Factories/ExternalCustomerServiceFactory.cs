@@ -6,6 +6,7 @@
 
 namespace Customer.ExternalServices.Factories;
 
+using System;
 using Customer.ExternalServices.Interfaces;
 using Customer.Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;

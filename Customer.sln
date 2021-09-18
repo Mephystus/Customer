@@ -15,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Api.UnitTests", "Customer.Api.UnitTests\Customer.Api.UnitTests.csproj", "{36FD1CE0-DA37-44D2-B316-C554EDA5D42C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Data.Schema", "Customer.Data.Schema\Customer.Data.Schema.csproj", "{86DC8293-F520-472B-96CE-8B7D614B2186}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Data.Schema", "Customer.Data.Schema\Customer.Data.Schema.csproj", "{86DC8293-F520-472B-96CE-8B7D614B2186}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Data.Access", "Customer.Data.Access\Customer.Data.Access.csproj", "{FC5E2F77-3E1A-476A-B0EC-EB645ACD4B06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Data.Access", "Customer.Data.Access\Customer.Data.Access.csproj", "{FC5E2F77-3E1A-476A-B0EC-EB645ACD4B06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

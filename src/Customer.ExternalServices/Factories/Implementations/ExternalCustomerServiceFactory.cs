@@ -4,9 +4,10 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.ExternalServices.Factories;
+namespace Customer.ExternalServices.Factories.Implementations;
 
 using System;
+using Customer.ExternalServices.Factories.Interfaces;
 using Customer.ExternalServices.Interfaces;
 using Customer.Infrastructure.Settings;
 using Microsoft.Extensions.Configuration;

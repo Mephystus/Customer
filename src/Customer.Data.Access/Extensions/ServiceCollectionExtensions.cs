@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ServiceExtensions.cs" company="The AA (Ireland)">
+//  <copyright file="ServiceCollectionExtensions.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Provides extension methods for the services.
 /// </summary>
-public static class ServiceExtensions
+public static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds the DB Context configuration to the pipeline.
@@ -25,9 +25,6 @@ public static class ServiceExtensions
     /// <returns>An instance of <see cref="IConfiguration"/>.</returns>
     public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
-        //// services.AddDbContext<CustomerContext>(options =>
-        ////        options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
         services.AddDbContext<CustomerContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "Mock DB"));
 

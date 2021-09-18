@@ -1,12 +1,13 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ServiceExtensions.cs" company="The AA (Ireland)">
+//  <copyright file="ServiceCollectionExtensions.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
 namespace Customer.Services.Extensions;
 
-using Customer.ExternalServices.Factories;
+using Customer.ExternalServices.Factories.Implementations;
+using Customer.ExternalServices.Factories.Interfaces;
 using Customer.Services.Implementations;
 using Customer.Services.Interfaces;
 using Customer.Services.Mappers;
@@ -15,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// <summary>
 /// Provides extension methods for the services.
 /// </summary>
-public static class ServiceExtensions
+public static class ServiceCollectionExtensions
 {
 
     /// <summary>

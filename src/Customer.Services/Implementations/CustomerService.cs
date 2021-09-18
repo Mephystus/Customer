@@ -12,10 +12,9 @@ using AutoMapper;
 using Models;
 using Interfaces;
 using SharedLibrary.Exceptions;
-using Customer.ExternalServices.Factories;
 using Customer.Data.Access.Repositories.Interfaces;
 using Customer.Data.Schema;
-using Customer.ExternalServices.Interfaces;
+using Customer.ExternalServices.Factories.Interfaces;
 
 /// <summary>
 /// Provides a direct implementation of the customer service.
@@ -85,17 +84,16 @@ public class CustomerService : ICustomerService
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task DeleteCustomerAsync(Guid customerId)
     {
-        // TODO: implementation
+        var customer = await _customerRepository.GetCustomerAsync(customerId);
 
-        var rnd = new Random();
-        var val = rnd.Next(0, 200);
-
-        if (val % 2 == 0)
+        if (customer == null)
         {
-            throw new NotFoundException($"The customer ({customerId}) does not exist.");
+            return;
         }
 
-        await Task.Delay(50);
+        _customerRepository.DeleteCustomer(customer);
+
+        await _customerRepository.SaveChangesAsync();
     }
 
     /// <summary>
@@ -107,7 +105,7 @@ public class CustomerService : ICustomerService
     {
         var customer = await _customerRepository.GetCustomerAsync(customerId);
 
-        if(customer == null)
+        if (customer == null)
         {
             throw new NotFoundException($"The customer ({customerId}) does not exist.");
         }
@@ -145,15 +143,6 @@ public class CustomerService : ICustomerService
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task UpdateCustomerAsync(CustomerRequest customerRequest)
     {
-        // TODO: implementation
-        var rnd = new Random();
-        var val = rnd.Next(0, 200);
-
-        if (val % 2 == 0)
-        {
-            throw new ValidationException("The customer is not valid!");
-        }
-
         var customer = _mapper.Map<Customer>(customerRequest);
 
         _customerRepository.UpdateCustomer(customer);

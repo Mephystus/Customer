@@ -33,7 +33,7 @@ public class Customer
     /// <summary>
     /// Gets or sets the middle name.
     /// </summary>
-    public string MiddleName { get; set; } = string.Empty;
+    public string MiddleName { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets the last name.

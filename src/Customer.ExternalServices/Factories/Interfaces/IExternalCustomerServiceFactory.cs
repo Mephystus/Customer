@@ -4,10 +4,9 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
+namespace Customer.ExternalServices.Factories.Interfaces;
 
 using Customer.ExternalServices.Interfaces;
-
-namespace Customer.ExternalServices.Factories;
 
 /// <summary>
 /// Provides the contract for the external customer services factory.

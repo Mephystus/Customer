@@ -6,7 +6,6 @@
 
 using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using App.Metrics.AspNetCore;
@@ -16,17 +15,13 @@ using Customer.Data.Access.Extensions;
 using Customer.Infrastructure.Settings;
 using Customer.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 using Serilog;
 using SharedLibrary.Filters.Filters;
-using SharedLibrary.Models.Models.HealthCheck;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,10 +53,6 @@ builder.WebHost.UseKestrel(options =>
 // Add services to the container.
 var services = builder.Services;
 
-var appSettings = builder.Configuration.Get<AppSettings>();
-
-services.AddSingleton(appSettings);
-
 services.Configure<KestrelServerOptions>(options => 
 {
     options.AllowSynchronousIO = true;
@@ -87,10 +78,6 @@ services.AddControllers(options =>
         options.JsonSerializerOptions.Converters.Add(enumConverter);
     });
 
-services.AddModelsFluentValidation();
-
-services.AddApiHealthCheck();
-
 services.AddRouting(options => options.LowercaseUrls = true);
 
 services.AddSwaggerGen(c =>
@@ -99,15 +86,19 @@ services.AddSwaggerGen(c =>
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
+    c.EnableAnnotations();
 });
 
-services.AddServicesAutoMapper();
+var appSettings = builder.Configuration.Get<AppSettings>();
 
-services.AddServicesDependencyInjection();
+services.AddSingleton(appSettings);
 
 services.AddDbContext(builder.Configuration);
-
 services.AddRepositoriesDependencyInjection();
+services.AddServicesAutoMapper();
+services.AddServicesDependencyInjection();
+services.AddModelsFluentValidation();
+services.AddApiHealthChecks();
 
 var app = builder.Build();
 
@@ -123,27 +114,7 @@ if (builder.Environment.IsDevelopment())
 
 app.UseRouting();
 
-app.UseHealthChecks("/health", new HealthCheckOptions
-{
-    ResponseWriter = async (context, report) =>
-    {
-        context.Response.ContentType = "application/json";
-
-        var response = new HealthCheckResponse
-        {
-            Status = report.Status.ToString(),
-            Details = report.Entries.Select(x => new HealthCheckDetail
-            {
-                Component = x.Key,
-                Status = x.Value.Status.ToString(),
-                Description = x.Value.Description ?? string.Empty
-            }),
-            Duration = report.TotalDuration
-        };
-
-        await context.Response.WriteAsync(JsonConvert.SerializeObject(response));
-    }
-});
+app.UseApiHealthChecks();
 
 app.UseHttpsRedirection();
 

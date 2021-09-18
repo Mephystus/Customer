@@ -23,6 +23,19 @@ public interface ICustomerRepository
     void AddCustomer(Customer customer);
 
     /// <summary>
+    /// Checks the database connection.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>True if can connect. False otherwise.</returns>
+    Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default(CancellationToken));
+
+    /// <summary>
+    /// Deletes the customer from the DB context.
+    /// </summary>
+    /// <param name="customer">The customer</param>
+    void DeleteCustomer(Customer customer);
+
+    /// <summary>
     /// Gets the customer by Id.
     /// </summary>
     /// <param name="customerId">The customer Id.</param>

@@ -4,11 +4,12 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Api.HealthChecks;
+namespace Customer.Data.Access;
 
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Customer.Data.Access.Repositories.Interfaces;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +19,11 @@ using Microsoft.Extensions.Logging;
 public class DbHealthCheck : IHealthCheck
 {
     /// <summary>
+    /// The customer repository.
+    /// </summary>
+    private readonly ICustomerRepository _customerRepository;
+
+    /// <summary>
     /// The logger.
     /// </summary>
     private readonly ILogger<DbHealthCheck> _logger;
@@ -25,9 +31,13 @@ public class DbHealthCheck : IHealthCheck
     /// <summary>
     /// Initialises a new instance of the <see cref="DbHealthCheck" /> class.
     /// </summary>
+    /// <param name="customerRepository">An instance of <see cref="ICustomerRepository"/>.</param>
     /// <param name="logger">An instance of <see cref="ILogger{DbHealthCheck}"/></param>
-    public DbHealthCheck(ILogger<DbHealthCheck> logger)
+    public DbHealthCheck(
+        ICustomerRepository customerRepository, 
+        ILogger<DbHealthCheck> logger)
     {
+        _customerRepository = customerRepository;
         _logger = logger;
     }
 
@@ -38,33 +48,28 @@ public class DbHealthCheck : IHealthCheck
     /// <param name="cancellationToken">The token that can be used to cancel the health check.</param>
     /// <returns>A <see cref="Task"/> that completes when the health check has finished,
     /// yielding the status of the component being checked.</returns>
-    public Task<HealthCheckResult> CheckHealthAsync(
+    public async Task<HealthCheckResult> CheckHealthAsync(
         HealthCheckContext context,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            //// TODO: implement health check against dependencies
-
-            var rnd = new Random();
-            var val = rnd.Next(0, 200);
-
-            if (val % 2 == 0)
+            if (await _customerRepository.CheckDatabaseConnectionAsync(cancellationToken))
             {
-                throw new Exception("Failed DB health check!");
+                return HealthCheckResult.Healthy();
             }
 
-            return Task.FromResult(HealthCheckResult.Healthy());
+            return HealthCheckResult.Unhealthy();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Failed DB health check!");
 
-            return Task.FromResult(new HealthCheckResult(
+            return new HealthCheckResult(
                 context.Registration.FailureStatus,
                 description: "Failed health check!",
                 exception: ex,
-                data: null));
+                data: null);
         }
     }
 }

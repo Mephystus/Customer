@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ServiceExtensions.cs" company="The AA (Ireland)">
+//  <copyright file="ServiceCollectionExtensions.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
@@ -8,20 +8,21 @@ namespace Customer.Api.Extensions;
 
 using Customer.Api.HealthChecks;
 using Customer.Api.Validators;
+using Customer.Data.Access;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Provides extension methods for the services.
+/// Provides extension methods for the <see cref="IServiceCollection"/>.
 /// </summary>
-public static class ServiceExtensions
+public static class ServiceCollectionExtensions
 {
     /// <summary>
     /// Adds the API health checks into the pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddApiHealthCheck(this IServiceCollection services)
+    public static IServiceCollection AddApiHealthChecks(this IServiceCollection services)
     {
         services.AddHealthChecks().AddCheck<AnotherHealthCheck>("Another");
         services.AddHealthChecks().AddCheck<DbHealthCheck>("Db");

@@ -44,6 +44,25 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
+    /// Checks the database connection.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>True if can connect. False otherwise.</returns>
+    public async Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default(CancellationToken))
+    {
+       return await _context.Database.CanConnectAsync();
+    }
+
+    /// <summary>
+    /// Deletes the customer from the DB context.
+    /// </summary>
+    /// <param name="customer">The customer</param>
+    public void DeleteCustomer(Customer customer)
+    {
+        _context.Customers.Remove(customer);
+    }
+
+    /// <summary>
     /// Gets the customer by Id.
     /// </summary>
     /// <param name="customerId">The customer Id.</param>

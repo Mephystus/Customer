@@ -6,6 +6,8 @@
 
 namespace Customer.Api.UnitTests;
 
+using System;
+using System.Threading.Tasks;
 using Customer.Api.Controllers;
 using Customer.Models;
 using Customer.Services.Interfaces;

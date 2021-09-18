@@ -6,6 +6,7 @@
 
 namespace Customer.Api.Validators;
 
+using System;
 using Customer.Models;
 using FluentValidation;
 

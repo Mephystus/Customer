@@ -6,6 +6,7 @@
 
 namespace Customer.Data.Schema;
 
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 /// <summary>

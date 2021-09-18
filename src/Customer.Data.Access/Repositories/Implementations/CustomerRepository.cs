@@ -8,6 +8,7 @@
 namespace Customer.Data.Access.Repositories.Implementations;
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Customer.Data.Access.Repositories.Interfaces;
 using Customer.Data.Schema;

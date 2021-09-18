@@ -1,29 +1,32 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="DbHealthCheck.cs" company="The AA (Ireland)">
+//  <copyright file="AnotherHealthCheck.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
 namespace Customer.Api.HealthChecks;
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 /// <summary>
-/// Defines the health check implementation for the dependency: 'DB'
+/// Defines the health check implementation for the dependency: 'Another'
 /// </summary>
-public class DbHealthCheck : IHealthCheck
+public class AnotherHealthCheck : IHealthCheck
 {
     /// <summary>
     /// The logger.
     /// </summary>
-    private readonly ILogger<DbHealthCheck> _logger;
+    private readonly ILogger<AnotherHealthCheck> _logger;
 
     /// <summary>
-    /// Initialises a new instance of the <see cref="DbHealthCheck" /> class.
+    /// Initialises a new instance of the <see cref="AnotherHealthCheck" /> class.
     /// </summary>
-    /// <param name="logger">An instance of <see cref="ILogger{DbHealthCheck}"/></param>
-    public DbHealthCheck(ILogger<DbHealthCheck> logger)
+    /// <param name="logger">An instance of <see cref="ILogger{AnotherHealthCheck}"/></param>
+    public AnotherHealthCheck(ILogger<AnotherHealthCheck> logger)
     {
         _logger = logger;
     }
@@ -48,14 +51,14 @@ public class DbHealthCheck : IHealthCheck
 
             if (val % 2 == 0)
             {
-                throw new Exception("Failed DB health check!");
+                throw new Exception("Failed another health check!");
             }
 
             return Task.FromResult(HealthCheckResult.Healthy());
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed DB health check!");
+            _logger.LogError(ex, "Failed another health check!");
 
             return Task.FromResult(new HealthCheckResult(
                 context.Registration.FailureStatus,

@@ -4,6 +4,9 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
+using System;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using App.Metrics.AspNetCore;
@@ -12,8 +15,14 @@ using Customer.Api.Extensions;
 using Customer.Data.Access.Extensions;
 using Customer.Infrastructure.Settings;
 using Customer.Services.Extensions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Serilog;
 using SharedLibrary.Filters.Filters;

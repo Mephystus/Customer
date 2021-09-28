@@ -31,12 +31,12 @@ public class CustomersControllerTests
     /// <summary>
     /// the System Under Test (Customer Controller)
     /// </summary>
-    private readonly CustomerController _sut;
+    private readonly CustomersController _sut;
 
     /// <summary>
     /// The logger.
     /// </summary>
-    private readonly ILogger<CustomerController> _logger;
+    private readonly ILogger<CustomersController> _logger;
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomersControllerTests"/> class.
@@ -44,9 +44,9 @@ public class CustomersControllerTests
     public CustomersControllerTests()
     {
         _customerService = Substitute.For<ICustomerService>();
-        _logger = Substitute.For<ILogger<CustomerController>>();
+        _logger = Substitute.For<ILogger<CustomersController>>();
 
-        _sut = new CustomerController(_logger, _customerService);
+        _sut = new CustomersController(_logger, _customerService);
     }
 
     /// <summary>

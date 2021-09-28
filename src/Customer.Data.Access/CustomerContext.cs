@@ -6,6 +6,7 @@
 
 namespace Customer.Data.Access;
 
+using System;
 using Customer.Data.Schema;
 using Microsoft.EntityFrameworkCore;
 
@@ -35,5 +36,31 @@ public class CustomerContext : DbContext
     {
         modelBuilder.Entity<Customer>()
             .HasKey(o => o.CustomerId);
+
+        modelBuilder.Entity<Customer>().HasData(
+            new Customer
+            {
+                CustomerId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
+                DateOfBirth = new DateTime(2000, 1, 1),
+                FirstName = "Jane",
+                MiddleName = "K.",
+                LastName = "Silver"
+            },
+            new Customer
+            {
+                CustomerId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa7"),
+                DateOfBirth = new DateTime(1990, 5, 21),
+                FirstName = "John",
+                MiddleName = "W.",
+                LastName = "Dalton"
+            },
+            new Customer
+            {
+                CustomerId = new Guid("3fa85f64-5717-4562-b3fc-2c963f66afa8"),
+                DateOfBirth = new DateTime(2005, 11, 9),
+                FirstName = "Flip",
+                MiddleName = "G.",
+                LastName = "Korg"
+            });
     }
 }

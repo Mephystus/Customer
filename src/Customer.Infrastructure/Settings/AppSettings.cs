@@ -4,9 +4,9 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
 namespace Customer.Infrastructure.Settings;
+
+using System.Collections.Generic;
 
 /// <summary>
 /// Defines the configuration/settings.

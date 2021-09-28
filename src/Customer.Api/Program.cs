@@ -11,6 +11,7 @@ using System.Text.Json.Serialization;
 using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 using Customer.Api.Extensions;
+using Customer.Api.Filters;
 using Customer.Data.Access.Extensions;
 using Customer.Infrastructure.Settings;
 using Customer.Services.Extensions;
@@ -67,6 +68,7 @@ services.AddControllers(options =>
         options.Filters.Add<NotFoundExceptionFilter>();
         options.Filters.Add<ValidationExceptionFilter>();
         options.Filters.Add<ValidationFilter>();
+        options.Filters.Add<LanguageFilter>();
     })
     .ConfigureApiBehaviorOptions(options => 
     {

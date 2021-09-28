@@ -23,7 +23,7 @@ public class ExternalCustomerService : IExternalCustomerService
     /// <returns>The <see cref="CustomerRiskResponse"/></returns>
     public async Task<CustomerRiskResponse> GetCustomerRiskAsync(Guid customerId)
     {
-        await Task.Delay(50);
+        await Task.Delay(150);
 
         var rnd = new Random();
         var val = rnd.Next(0, 200);

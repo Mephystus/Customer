@@ -18,7 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds the DB Context configuration to the pipeline.
+    /// Adds the DB Context configuration into the DI pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
@@ -32,7 +32,7 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds the respositories dependency injection into the pipeline.
+    /// Adds the respositories dependency injection into the DI pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>

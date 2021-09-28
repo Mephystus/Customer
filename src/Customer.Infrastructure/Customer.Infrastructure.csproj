@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Customer.Api.Client\Customer.Api.Client.csproj" />
     <ProjectReference Include="..\Customer.Models\Customer.Models.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="CustomerController.cs" company="The AA (Ireland)">
+//  <copyright file="CustomersController.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
@@ -14,12 +14,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Collections.Generic;
 
 /// <summary>
-/// The customer controller.
+/// The customers controller.
 /// </summary>
 [Route("api/[controller]")]
-public class CustomerController : ApiControllerBase
+public class CustomersController : ApiControllerBase
 {
     /// <summary>
     /// The customer service.
@@ -29,15 +30,15 @@ public class CustomerController : ApiControllerBase
     /// <summary>
     /// The logger.
     /// </summary>
-    private readonly ILogger<CustomerController> _logger;
+    private readonly ILogger<CustomersController> _logger;
 
     /// <summary>
-    /// Initialises a new instance of the <see cref="CustomerController" /> class.
+    /// Initialises a new instance of the <see cref="CustomersController" /> class.
     /// </summary>
     /// <param name="logger">An instance of <see cref="ILogger{CustomerController}"/></param>
     /// <param name="customerService">An instance of <see cref="ICustomerService"/></param>
-    public CustomerController(
-        ILogger<CustomerController> logger,
+    public CustomersController(
+        ILogger<CustomersController> logger,
         ICustomerService customerService)
     {
         _logger = logger;
@@ -58,12 +59,10 @@ public class CustomerController : ApiControllerBase
 
         var id = await _customerService.CreateCustomerAsync(customerRequest);
 
-        if(id == null)
+        if (id == null)
         {
             return BadRequest();
         }
-
-        var customer = await _customerService.GetCustomerAsync((Guid)id);
 
         return CreatedAtAction(nameof(GetCustomerAsync),
                                 new { id = customerRequest.Id },
@@ -123,6 +122,32 @@ public class CustomerController : ApiControllerBase
         _logger.LogInformation("Output: {@riskResponse}", riskResponse);
 
         return Ok(riskResponse);
+    }
+
+    /// <summary>
+    /// Gets the risk for multiple customers.
+    /// </summary>
+    /// <param name="ids">The customers Id.</param>
+    /// <returns>The customers risk.</returns>
+    [HttpGet("risks")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The customer", typeof(List<CustomerRiskResponse>))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Customer not found.")]
+    public async Task<IActionResult> GetCustomersRiskAsync([FromQuery]Guid[] ids)
+    {
+        _logger.LogInformation("Input: {ids}", ids);
+
+        var response = new List<CustomerRiskResponse>();
+
+        foreach (var id in ids)
+        {
+            var customerRisk = await _customerService.GetCustomerRiskAsync(id);
+
+            response.Add(customerRisk);
+        }         
+
+        _logger.LogInformation("Output: {@riskResponse}", response);
+
+        return Ok(response);
     }
 
     /// <summary>

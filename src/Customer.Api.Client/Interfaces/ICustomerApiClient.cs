@@ -44,4 +44,11 @@ public interface ICustomerApiClient
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     Task UpdateCustomerAsync(CustomerRequest customerRequest, CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Pings the customer API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    Task<object> PingAsync(CancellationToken cancellationToken = default);
 }

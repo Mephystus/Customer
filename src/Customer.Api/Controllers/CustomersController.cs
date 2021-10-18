@@ -141,10 +141,9 @@ public class CustomersController : ApiControllerBase
         foreach (var id in ids)
         {
             var customerRisk = await _customerService.GetCustomerRiskAsync(id);
-
             response.Add(customerRisk);
-        }         
-
+        }
+         
         _logger.LogInformation("Output: {@riskResponse}", response);
 
         return Ok(response);
@@ -167,5 +166,18 @@ public class CustomersController : ApiControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Ping the controller.
+    /// </summary>
+    /// <returns>The current date.</returns>
+    [HttpGet("ping")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The current date")]
+    public IActionResult Ping()
+    {        
+        return Ok(new
+        {
+            Date = DateTime.Now
+        });
+    }
 }
 

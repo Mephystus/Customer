@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using Customer.Api.Client.Interfaces;
 using Customer.Models;
+using SharedLibrary.Api.Client;
 
 /// <summary>
 /// Direct implementation of the <see cref="ICustomerApiClient"/>.
@@ -72,5 +73,15 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     public async Task UpdateCustomerAsync(CustomerRequest customerRequest, CancellationToken cancellationToken = default)
     {
         await PutAsync<CustomerRequest>(BaseEnpoint, customerRequest, cancellationToken);
+    }
+
+    /// <summary>
+    /// Pings the customer API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public async Task<object> PingAsync(CancellationToken cancellationToken = default)
+    {
+        return await GetAsync<object>($"{BaseEnpoint}/ping", cancellationToken);
     }
 }

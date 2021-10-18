@@ -15,7 +15,6 @@ using Microsoft.Extensions.Logging;
 using Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
-using System.Linq;
 
 /// <summary>
 /// The customers controller.
@@ -167,5 +166,18 @@ public class CustomersController : ApiControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Ping the controller.
+    /// </summary>
+    /// <returns>The current date.</returns>
+    [HttpGet("ping")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The current date")]
+    public IActionResult Ping()
+    {        
+        return Ok(new
+        {
+            Date = DateTime.Now
+        });
+    }
 }
 

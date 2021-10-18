@@ -59,14 +59,7 @@ public class CustomerService : ICustomerService
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task<Guid?> CreateCustomerAsync(CustomerRequest customerRequest)
     {
-        // TODO: implementation
-        var rnd = new Random();
-        var val = rnd.Next(0, 200);
-
-        if (val % 2 == 0)
-        {
-            throw new Exception("Failure creating the customer!");
-        }
+        CheckMiddleName(customerRequest);
 
         var customer = _mapper.Map<Customer>(customerRequest);
 
@@ -143,10 +136,30 @@ public class CustomerService : ICustomerService
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task UpdateCustomerAsync(CustomerRequest customerRequest)
     {
+        CheckMiddleName(customerRequest, false);
+
         var customer = _mapper.Map<Customer>(customerRequest);
 
         _customerRepository.UpdateCustomer(customer);
 
         await _customerRepository.SaveChangesAsync();
+    }
+
+    private static void CheckMiddleName(CustomerRequest customerRequest, bool isNew = true)
+    {
+        if (customerRequest.MiddleName.StartsWith("e", StringComparison.InvariantCultureIgnoreCase))
+        {
+            throw new Exception("Unhandled exception...");
+        }
+
+        if (customerRequest.MiddleName.StartsWith("v", StringComparison.InvariantCultureIgnoreCase))
+        {
+            throw new ValidationException("Failed to validate the 'Middle Name'!", nameof(customerRequest.MiddleName));
+        }
+
+        if (!isNew && customerRequest.MiddleName.StartsWith("n", StringComparison.InvariantCultureIgnoreCase))
+        {
+            throw new NotFoundException($"The customer ({customerRequest.Id}) does not exist.");
+        }
     }
 }

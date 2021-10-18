@@ -22,6 +22,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using SharedLibrary.Api.Extensions;
 using SharedLibrary.Filters.Filters;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// The customers controller.
@@ -141,10 +142,9 @@ public class CustomersController : ApiControllerBase
         foreach (var id in ids)
         {
             var customerRisk = await _customerService.GetCustomerRiskAsync(id);
-
             response.Add(customerRisk);
-        }         
-
+        }
+         
         _logger.LogInformation("Output: {@riskResponse}", response);
 
         return Ok(response);

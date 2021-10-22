@@ -17,7 +17,6 @@ using Customer.Infrastructure.Settings;
 using Customer.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,7 +35,8 @@ Log.Information("Starting up");
 
 builder.Host.UseSerilog();
 
-builder.Host.UseMetricsWebTracking()
+builder.Host
+    .UseMetricsWebTracking()
     .UseMetrics(options => 
     {
         options.EndpointOptions = endpointsOptions =>
@@ -54,11 +54,6 @@ builder.WebHost.UseKestrel(options =>
 
 // Add services to the container.
 var services = builder.Services;
-
-services.Configure<KestrelServerOptions>(options => 
-{
-    options.AllowSynchronousIO = true;
-});
 
 services.AddMetrics();
 

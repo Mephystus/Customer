@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------------
 //  <copyright file="Program.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland) . All rights reserved.
+//    Copyright (c) The AA (Ireland Test). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="AddressRequest.cs" company="The AA (Ireland)">
+//  <copyright file="PingResponse.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
@@ -7,24 +7,18 @@
 namespace Customer.Models;
 
 using System;
-using Base;
 
 /// <summary>
-/// Defines the request class used for creating/updating addresses.
+/// Defines the response class used for the customer ping.
 /// </summary>
-public class AddressRequest : AddressBase
+public class PingResponse
 {
     #region Public Properties
 
     /// <summary>
-    /// Gets or sets the customer Id.
+    /// Gets or sets the date/time.
     /// </summary>
-    public Guid CustomerId { get; set; }
-
-    /// <summary>
-    /// Gets or sets the user that created/updated the address.
-    /// </summary>
-    public string UpdatedBy { get; set; } = default!;
+    public DateTime DateTime { get; set; }
 
     #endregion Public Properties
 }

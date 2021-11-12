@@ -14,6 +14,8 @@ using Enums;
 /// </summary>
 public abstract class PhoneBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the phone Id.
     /// </summary>
@@ -28,4 +30,6 @@ public abstract class PhoneBase
     /// Gets or sets the phone type.
     /// </summary>
     public PhoneType Type { get; set; }
+
+    #endregion Public Properties
 }

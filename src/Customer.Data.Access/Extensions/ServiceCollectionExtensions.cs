@@ -6,23 +6,24 @@
 
 namespace Customer.Data.Access.Extensions;
 
-using Customer.Data.Access.Repositories.Implementations;
-using Customer.Data.Access.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Repositories.Implementations;
+using Repositories.Interfaces;
 
 /// <summary>
 /// Provides extension methods for the services.
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    #region Public Methods
+
     /// <summary>
     /// Adds the DB Context configuration into the DI pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
-    /// <returns>An instance of <see cref="IConfiguration"/>.</returns>
     public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<CustomerContext>(options =>
@@ -32,7 +33,7 @@ public static class ServiceCollectionExtensions
     }
 
     /// <summary>
-    /// Adds the respositories dependency injection into the DI pipeline.
+    /// Adds the repositories dependency injection into the DI pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
@@ -42,4 +43,6 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
+
+    #endregion Public Methods
 }

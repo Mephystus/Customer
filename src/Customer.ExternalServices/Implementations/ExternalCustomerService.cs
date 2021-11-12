@@ -16,6 +16,8 @@ using Interfaces;
 /// </summary>
 public class ExternalCustomerService : IExternalCustomerService
 {
+    #region Public Methods
+
     /// <summary>
     /// Gets the customer risk .
     /// </summary>
@@ -46,4 +48,6 @@ public class ExternalCustomerService : IExternalCustomerService
             Description = "Some description!"
         };
     }
+
+    #endregion Public Methods
 }

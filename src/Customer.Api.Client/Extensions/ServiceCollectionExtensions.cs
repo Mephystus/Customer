@@ -4,10 +4,10 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Api.Client;
+namespace Customer.Api.Client.Extensions;
 
-using Customer.Api.Client.Implementations;
-using Customer.Api.Client.Interfaces;
+using Implementations;
+using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using SharedLibrary.Api.Client.Configuration;
 using SharedLibrary.Api.Client.Extensions;
@@ -17,6 +17,8 @@ using SharedLibrary.Api.Client.Extensions;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    #region Public Methods
+
     /// <summary>
     /// Adds the customer API client into the DI pipeline.
     /// </summary>
@@ -27,7 +29,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         Dictionary<string, HttpClientSettings> clientSettingsDictionary)
     {
-        var key = nameof(ICustomerApiClient);
+        const string key = nameof(ICustomerApiClient);
 
         if (!clientSettingsDictionary.ContainsKey(key))
         {
@@ -39,5 +41,7 @@ public static class ServiceCollectionExtensions
         services.AddHttpClient<ICustomerApiClient, CustomerApiClient>(clientSettings);
 
         return services;
-    }    
+    }
+
+    #endregion Public Methods
 }

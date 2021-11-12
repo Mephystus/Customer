@@ -6,7 +6,6 @@
 
 namespace Customer.Api.Controllers;
 
-using Customer.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -15,10 +14,4 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 public abstract class ApiControllerBase : ControllerBase
 {
-    /// <summary>
-    /// Gets the user (Application Principal).
-    /// </summary>
-    public new ApplicationPrincipal User => (ApplicationPrincipal)HttpContext.User;
 }
-
-

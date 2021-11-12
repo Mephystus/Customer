@@ -13,8 +13,12 @@ using Base;
 /// </summary>
 public class CustomerRequest : CustomerBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the user that created/updated the customer.
     /// </summary>
     public string UpdatedBy { get; set; } = default!;
+
+    #endregion Public Properties
 }

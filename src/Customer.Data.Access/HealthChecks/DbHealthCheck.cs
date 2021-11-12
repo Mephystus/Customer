@@ -4,20 +4,22 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Data.Access;
+namespace Customer.Data.Access.HealthChecks;
 
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Customer.Data.Access.Repositories.Interfaces;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Repositories.Interfaces;
 
 /// <summary>
 /// Defines the health check implementation for the dependency: 'DB'
 /// </summary>
 public class DbHealthCheck : IHealthCheck
 {
+    #region Private Fields
+
     /// <summary>
     /// The customer repository.
     /// </summary>
@@ -28,18 +30,26 @@ public class DbHealthCheck : IHealthCheck
     /// </summary>
     private readonly ILogger<DbHealthCheck> _logger;
 
+    #endregion Private Fields
+
+    #region Public Constructors
+
     /// <summary>
     /// Initialises a new instance of the <see cref="DbHealthCheck" /> class.
     /// </summary>
     /// <param name="customerRepository">An instance of <see cref="ICustomerRepository"/>.</param>
     /// <param name="logger">An instance of <see cref="ILogger{DbHealthCheck}"/></param>
     public DbHealthCheck(
-        ICustomerRepository customerRepository, 
+        ICustomerRepository customerRepository,
         ILogger<DbHealthCheck> logger)
     {
         _customerRepository = customerRepository;
         _logger = logger;
     }
+
+    #endregion Public Constructors
+
+    #region Public Methods
 
     /// <summary>
     /// Runs the health check, returning the status of the component being checked.
@@ -67,9 +77,10 @@ public class DbHealthCheck : IHealthCheck
 
             return new HealthCheckResult(
                 context.Registration.FailureStatus,
-                description: "Failed health check!",
-                exception: ex,
-                data: null);
+                "Failed health check!",
+                ex);
         }
     }
+
+    #endregion Public Methods
 }

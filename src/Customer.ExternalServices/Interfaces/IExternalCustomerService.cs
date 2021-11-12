@@ -15,10 +15,14 @@ using Dto;
 /// </summary>
 public interface IExternalCustomerService
 {
+    #region Public Methods
+
     /// <summary>
     /// Gets the customer risk .
     /// </summary>
     /// <param name="customerId">The customer Id.</param>
     /// <returns>The <see cref="CustomerRiskResponse"/></returns>
     Task<CustomerRiskResponse> GetCustomerRiskAsync(Guid customerId);
+
+    #endregion Public Methods
 }

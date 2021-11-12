@@ -13,10 +13,14 @@ using Customer.ExternalServices.Interfaces;
 /// </summary>
 public interface IExternalCustomerServiceFactory
 {
+    #region Public Methods
+
     /// <summary>
     /// Gets an external customer service.
     /// </summary>
     /// <param name="identifier">The service identifier.</param>
     /// <returns>An instance of <see cref="IExternalCustomerService"/></returns>
     IExternalCustomerService GetExternalCustomerService(string identifier);
+
+    #endregion Public Methods
 }

@@ -4,17 +4,19 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-
 namespace Customer.Services.Mappers;
 
+using System;
 using AutoMapper;
-using Customer.Data.Schema;
+using Data.Schema;
 
 /// <summary>
 /// Provides the mapping configuration for the customer DTOs.
 /// </summary>
 public class CustomerMappingProfile : Profile
 {
+    #region Public Constructors
+
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerMappingProfile"/> class.
     /// </summary>
@@ -27,7 +29,9 @@ public class CustomerMappingProfile : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.CustomerId));
 
         CreateMap<Models.CustomerRequest, Customer>()
+            .ForMember(dest => dest.UpdatedDate, opt => opt.MapFrom(src => DateTime.UtcNow))
             .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.Id));
     }
-}
 
+    #endregion Public Constructors
+}

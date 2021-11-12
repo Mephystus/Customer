@@ -8,13 +8,12 @@ namespace Customer.Api.Controllers;
 
 using System;
 using System.Threading.Tasks;
-using Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Models;
 using Services.Interfaces;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Collections.Generic;
 
 /// <summary>
 /// The customers controller.
@@ -22,6 +21,8 @@ using System.Collections.Generic;
 [Route("api/[controller]")]
 public class CustomersController : ApiControllerBase
 {
+    #region Private Fields
+
     /// <summary>
     /// The customer service.
     /// </summary>
@@ -31,6 +32,10 @@ public class CustomersController : ApiControllerBase
     /// The logger.
     /// </summary>
     private readonly ILogger<CustomersController> _logger;
+
+    #endregion Private Fields
+
+    #region Public Constructors
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomersController" /> class.
@@ -45,6 +50,10 @@ public class CustomersController : ApiControllerBase
         _customerService = customerService;
     }
 
+    #endregion Public Constructors
+
+    #region Public Methods
+
     /// <summary>
     /// Creates a new customer.
     /// </summary>
@@ -57,12 +66,7 @@ public class CustomersController : ApiControllerBase
     {
         _logger.LogInformation("Input: {@customerRequest}", customerRequest);
 
-        var id = await _customerService.CreateCustomerAsync(customerRequest);
-
-        if (id == null)
-        {
-            return BadRequest();
-        }
+        await _customerService.CreateCustomerAsync(customerRequest);
 
         return CreatedAtAction(nameof(GetCustomerAsync),
                                 new { id = customerRequest.Id },
@@ -75,11 +79,11 @@ public class CustomersController : ApiControllerBase
     /// <param name="id">The customer Id.</param>
     /// <returns>The customer.</returns>
     [HttpDelete("{id:guid}")]
-    [SwaggerResponse(StatusCodes.Status200OK, "The customer deleted successfully")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The customer was deleted successfully")]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Customer not found.")]
     public async Task<IActionResult> DeleteCustomerAsync(Guid id)
     {
-        _logger.LogInformation("Input: {id}", id);
+        _logger.LogInformation("Input: {@id}", id);
 
         await _customerService.DeleteCustomerAsync(id);
 
@@ -96,7 +100,7 @@ public class CustomersController : ApiControllerBase
     [SwaggerResponse(StatusCodes.Status404NotFound, "Customer not found.")]
     public async Task<IActionResult> GetCustomerAsync(Guid id)
     {
-        _logger.LogInformation("Input: {id}", id);
+        _logger.LogInformation("Input: {@id}", id);
 
         var customer = await _customerService.GetCustomerAsync(id);
 
@@ -111,11 +115,11 @@ public class CustomersController : ApiControllerBase
     /// <param name="id">The customer Id.</param>
     /// <returns>The customer risk.</returns>
     [HttpGet("{id:guid}/risk")]
-    [SwaggerResponse(StatusCodes.Status200OK, "The customer", typeof(CustomerRiskResponse))]
+    [SwaggerResponse(StatusCodes.Status200OK, "The customer risk", typeof(CustomerRiskResponse))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Customer not found.")]
     public async Task<IActionResult> GetCustomerRiskAsync(Guid id)
     {
-        _logger.LogInformation("Input: {id}", id);
+        _logger.LogInformation("Input: {@id}", id);
 
         var riskResponse = await _customerService.GetCustomerRiskAsync(id);
 
@@ -125,28 +129,17 @@ public class CustomersController : ApiControllerBase
     }
 
     /// <summary>
-    /// Gets the risk for multiple customers.
+    /// Ping the action to check/test the API.
     /// </summary>
-    /// <param name="ids">The customers Id.</param>
-    /// <returns>The customers risk.</returns>
-    [HttpGet("risks")]
-    [SwaggerResponse(StatusCodes.Status200OK, "The customer", typeof(List<CustomerRiskResponse>))]
-    [SwaggerResponse(StatusCodes.Status404NotFound, "Customer not found.")]
-    public async Task<IActionResult> GetCustomersRiskAsync([FromQuery]Guid[] ids)
+    /// <returns>The current date.</returns>
+    [HttpGet("ping")]
+    [SwaggerResponse(StatusCodes.Status200OK, "The current date")]
+    public IActionResult Ping()
     {
-        _logger.LogInformation("Input: {ids}", ids);
-
-        var response = new List<CustomerRiskResponse>();
-
-        foreach (var id in ids)
+        return Ok(new PingResponse
         {
-            var customerRisk = await _customerService.GetCustomerRiskAsync(id);
-            response.Add(customerRisk);
-        }
-         
-        _logger.LogInformation("Output: {@riskResponse}", response);
-
-        return Ok(response);
+            DateTime = DateTime.Now
+        });
     }
 
     /// <summary>
@@ -166,18 +159,5 @@ public class CustomersController : ApiControllerBase
         return NoContent();
     }
 
-    /// <summary>
-    /// Ping the controller.
-    /// </summary>
-    /// <returns>The current date.</returns>
-    [HttpGet("ping")]
-    [SwaggerResponse(StatusCodes.Status200OK, "The current date")]
-    public IActionResult Ping()
-    {        
-        return Ok(new
-        {
-            Date = DateTime.Now
-        });
-    }
+    #endregion Public Methods
 }
-

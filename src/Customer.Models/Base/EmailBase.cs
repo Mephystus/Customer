@@ -14,6 +14,8 @@ using Enums;
 /// </summary>
 public abstract class EmailBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the email address.
     /// </summary>
@@ -28,4 +30,6 @@ public abstract class EmailBase
     /// Gets or sets the email type.
     /// </summary>
     public EmailType Type { get; set; }
+
+    #endregion Public Properties
 }

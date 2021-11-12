@@ -8,8 +8,8 @@ namespace Customer.Api.Client.Implementations;
 
 using System;
 using System.Threading.Tasks;
-using Customer.Api.Client.Interfaces;
-using Customer.Models;
+using Interfaces;
+using Models;
 using SharedLibrary.Api.Client;
 
 /// <summary>
@@ -17,10 +17,16 @@ using SharedLibrary.Api.Client;
 /// </summary>
 public class CustomerApiClient : ApiClientBase, ICustomerApiClient
 {
+    #region Private Fields
+
     /// <summary>
     /// The base endpoint for the customer API.
     /// </summary>
-    private const string BaseEnpoint = "api/customers";
+    private const string BaseEndpoint = "api/customers";
+
+    #endregion Private Fields
+
+    #region Public Constructors
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerApiClient"/> class.
@@ -31,6 +37,10 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     {
     }
 
+    #endregion Public Constructors
+
+    #region Public Methods
+
     /// <summary>
     /// Creates a customer.
     /// </summary>
@@ -39,7 +49,7 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task CreateCustomerAsync(CustomerRequest customerRequest, CancellationToken cancellationToken = default)
     {
-        await PostAsync<CustomerRequest>(BaseEnpoint, customerRequest, cancellationToken);
+        await PostAsync(BaseEndpoint, customerRequest, cancellationToken);
     }
 
     /// <summary>
@@ -50,7 +60,7 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        await DeleteAsync<object>($"{BaseEnpoint}/{id}", cancellationToken);
+        await DeleteAsync<object>($"{BaseEndpoint}/{id}", cancellationToken);
     }
 
     /// <summary>
@@ -61,7 +71,17 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task<CustomerResponse> GetCustomerAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await GetAsync<CustomerResponse>($"{BaseEnpoint}/{id}", cancellationToken);
+        return await GetAsync<CustomerResponse>($"{BaseEndpoint}/{id}", cancellationToken);
+    }
+
+    /// <summary>
+    /// Pings the customer API.
+    /// </summary>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public async Task<object> PingAsync(CancellationToken cancellationToken = default)
+    {
+        return await GetAsync<object>($"{BaseEndpoint}/ping", cancellationToken);
     }
 
     /// <summary>
@@ -72,16 +92,8 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task UpdateCustomerAsync(CustomerRequest customerRequest, CancellationToken cancellationToken = default)
     {
-        await PutAsync<CustomerRequest>(BaseEnpoint, customerRequest, cancellationToken);
+        await PutAsync(BaseEndpoint, customerRequest, cancellationToken);
     }
 
-    /// <summary>
-    /// Pings the customer API.
-    /// </summary>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task<object> PingAsync(CancellationToken cancellationToken = default)
-    {
-        return await GetAsync<object>($"{BaseEnpoint}/ping", cancellationToken);
-    }
+    #endregion Public Methods
 }

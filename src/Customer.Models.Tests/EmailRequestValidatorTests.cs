@@ -1,34 +1,44 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="EmailValidatorTests.cs" company="The AA (Ireland)">
+//  <copyright file="EmailRequestValidatorTests.cs" company="The AA (Ireland)">
 //    Copyright (c) The AA (Ireland). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Api.UnitTests;
+namespace Customer.Models.Tests;
 
-using Customer.Api.Validators;
-using Customer.Models;
 using FluentValidation;
 using FluentValidation.TestHelper;
+using Models;
+using Validators;
 using Xunit;
 
 /// <summary>
 /// Performs the unit tests associated with email validation.
 /// </summary>
-public class EmailValidatorTests
+public class EmailRequestValidatorTests
 {
+    #region Private Fields
+
     /// <summary>
     /// The email request validator.
     /// </summary>
     private readonly EmailRequestValidator _sut;
 
+    #endregion Private Fields
+
+    #region Public Constructors
+
     /// <summary>
-    /// Initialises a new instance of the <see cref="EmailValidatorTests"/> class.
+    /// Initialises a new instance of the <see cref="EmailRequestValidatorTests"/> class.
     /// </summary>
-    public EmailValidatorTests() 
+    public EmailRequestValidatorTests()
     {
         _sut = new EmailRequestValidator();
     }
+
+    #endregion Public Constructors
+
+    #region Public Methods
 
     /// <summary>
     /// Test the email request validator for empty email address.
@@ -54,8 +64,7 @@ public class EmailValidatorTests
     [Fact]
     public void EmailRequestValidator_InvalidEmailAddress_RaisesValidationError()
     {
-
-        var request = new EmailRequest 
+        var request = new EmailRequest
         {
             EmailAddress = "test.test"
         };
@@ -66,4 +75,6 @@ public class EmailValidatorTests
                 .WithErrorMessage("'Email Address' is not a valid email address.")
                 .WithSeverity(Severity.Error);
     }
-} 
+
+    #endregion Public Methods
+}

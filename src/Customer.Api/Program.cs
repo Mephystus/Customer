@@ -11,9 +11,9 @@ using System.Text.Json.Serialization;
 using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 using Customer.Api.Extensions;
-using Customer.Api.Filters;
 using Customer.Data.Access.Extensions;
 using Customer.Infrastructure.Settings;
+using Customer.Models.Extensions;
 using Customer.Services.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,7 +37,7 @@ builder.Host.UseSerilog();
 
 builder.Host
     .UseMetricsWebTracking()
-    .UseMetrics(options => 
+    .UseMetrics(options =>
     {
         options.EndpointOptions = endpointsOptions =>
         {
@@ -64,9 +64,8 @@ services.AddControllers(options =>
         options.Filters.Add<NotFoundExceptionFilter>();
         options.Filters.Add<ValidationExceptionFilter>();
         options.Filters.Add<ValidationFilter>();
-        options.Filters.Add<LanguageFilter>();
     })
-    .ConfigureApiBehaviorOptions(options => 
+    .ConfigureApiBehaviorOptions(options =>
     {
         options.SuppressModelStateInvalidFilter = true;
     })
@@ -105,7 +104,8 @@ if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => {
+    app.UseSwaggerUI(c =>
+    {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "Customer.Api v1");
     });
 }

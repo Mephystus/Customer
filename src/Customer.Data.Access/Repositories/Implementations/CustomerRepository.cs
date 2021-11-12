@@ -4,25 +4,30 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-
 namespace Customer.Data.Access.Repositories.Implementations;
 
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Customer.Data.Access.Repositories.Interfaces;
-using Customer.Data.Schema;
+using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Schema;
 
 /// <summary>
 /// Direct implementation of the <see cref="ICustomerRepository"/>.
 /// </summary>
 public class CustomerRepository : ICustomerRepository
 {
+    #region Private Fields
+
     /// <summary>
     /// The customer DB context.
     /// </summary>
     private readonly CustomerContext _context;
+
+    #endregion Private Fields
+
+    #region Public Constructors
 
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerRepository"/> class.
@@ -32,6 +37,10 @@ public class CustomerRepository : ICustomerRepository
     {
         _context = context;
     }
+
+    #endregion Public Constructors
+
+    #region Public Methods
 
     /// <summary>
     /// Adds the customer into the DB context.
@@ -48,9 +57,9 @@ public class CustomerRepository : ICustomerRepository
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>True if can connect. False otherwise.</returns>
-    public async Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default)
     {
-       return await _context.Database.CanConnectAsync();
+        return await _context.Database.CanConnectAsync(cancellationToken);
     }
 
     /// <summary>
@@ -77,7 +86,7 @@ public class CustomerRepository : ICustomerRepository
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The number of state entries written to the database</returns>
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
+    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         return await _context.SaveChangesAsync(cancellationToken);
     }
@@ -88,7 +97,8 @@ public class CustomerRepository : ICustomerRepository
     /// <param name="customer">The customer</param>
     public void UpdateCustomer(Customer customer)
     {
-          _context.Customers.Update(customer);
+        _context.Customers.Update(customer);
     }
-}
 
+    #endregion Public Methods
+}

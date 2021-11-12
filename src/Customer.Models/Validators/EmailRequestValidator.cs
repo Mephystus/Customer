@@ -4,16 +4,18 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Api.Validators;
+namespace Customer.Models.Validators;
 
-using Customer.Models;
 using FluentValidation;
+using Models;
 
 /// <summary>
 /// Performs the validation for the <see cref="EmailRequest"/>
 /// </summary>
 public class EmailRequestValidator : AbstractValidator<EmailRequest>
 {
+    #region Public Constructors
+
     /// <summary>
     /// Initialises a new instance of the <see cref="EmailRequestValidator"/> class.
     /// </summary>
@@ -22,4 +24,6 @@ public class EmailRequestValidator : AbstractValidator<EmailRequest>
         RuleFor(x => x.EmailAddress).NotEmpty();
         RuleFor(x => x.EmailAddress).EmailAddress();
     }
+
+    #endregion Public Constructors
 }

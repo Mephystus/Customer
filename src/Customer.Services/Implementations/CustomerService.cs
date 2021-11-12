@@ -9,18 +9,21 @@ namespace Customer.Services.Implementations;
 using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using Models;
-using Interfaces;
-using SharedLibrary.Exceptions;
 using Customer.Data.Access.Repositories.Interfaces;
-using Customer.Data.Schema;
 using Customer.ExternalServices.Factories.Interfaces;
+using Customer.Models.Base;
+using Data.Schema;
+using Interfaces;
+using Models;
+using SharedLibrary.Exceptions;
 
 /// <summary>
 /// Provides a direct implementation of the customer service.
 /// </summary>
 public class CustomerService : ICustomerService
 {
+    #region Private Fields
+
     /// <summary>
     /// The customer repository.
     /// </summary>
@@ -36,6 +39,10 @@ public class CustomerService : ICustomerService
     /// </summary>
     private readonly IMapper _mapper;
 
+    #endregion Private Fields
+
+    #region Public Constructors
+
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerService"/> class.
     /// </summary>
@@ -44,7 +51,7 @@ public class CustomerService : ICustomerService
     /// <param name="mapper">An instance of <see cref="IMapper"/>.</param>
     public CustomerService(
                 ICustomerRepository customerRepository,
-                IExternalCustomerServiceFactory externalCustomerServiceFactory, 
+                IExternalCustomerServiceFactory externalCustomerServiceFactory,
                 IMapper mapper)
     {
         _customerRepository = customerRepository;
@@ -52,12 +59,16 @@ public class CustomerService : ICustomerService
         _mapper = mapper;
     }
 
+    #endregion Public Constructors
+
+    #region Public Methods
+
     /// <summary>
     /// Creates a new customer.
     /// </summary>
     /// <param name="customerRequest">The customer request.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task<Guid?> CreateCustomerAsync(CustomerRequest customerRequest)
+    public async Task CreateCustomerAsync(CustomerRequest customerRequest)
     {
         CheckMiddleName(customerRequest);
 
@@ -66,8 +77,6 @@ public class CustomerService : ICustomerService
         _customerRepository.AddCustomer(customer);
 
         await _customerRepository.SaveChangesAsync();
-
-        return customer.CustomerId;
     }
 
     /// <summary>
@@ -81,7 +90,7 @@ public class CustomerService : ICustomerService
 
         if (customer == null)
         {
-            return;
+            throw new NotFoundException($"The customer ({customerId}) does not exist.");
         }
 
         _customerRepository.DeleteCustomer(customer);
@@ -145,7 +154,16 @@ public class CustomerService : ICustomerService
         await _customerRepository.SaveChangesAsync();
     }
 
-    private static void CheckMiddleName(CustomerRequest customerRequest, bool isNew = true)
+    #endregion Public Methods
+
+    #region Private Methods
+
+    /// <summary>
+    /// Dummy/Stub method to test/check the middle name.
+    /// </summary>
+    /// <param name="customerRequest">The customer request.</param>
+    /// <param name="isNew">Indicates whether it's a new customer.</param>
+    private static void CheckMiddleName(CustomerBase customerRequest, bool isNew = true)
     {
         if (customerRequest.MiddleName.StartsWith("e", StringComparison.InvariantCultureIgnoreCase))
         {
@@ -162,4 +180,6 @@ public class CustomerService : ICustomerService
             throw new NotFoundException($"The customer ({customerRequest.Id}) does not exist.");
         }
     }
+
+    #endregion Private Methods
 }

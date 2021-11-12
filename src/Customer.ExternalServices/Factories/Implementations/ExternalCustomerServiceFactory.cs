@@ -17,10 +17,16 @@ using Microsoft.Extensions.Configuration;
 /// </summary>
 public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
 {
+    #region Private Fields
+
     /// <summary>
     /// The configuration.
     /// </summary>
     private readonly IConfiguration _configuration;
+
+    #endregion Private Fields
+
+    #region Public Constructors
 
     /// <summary>
     /// Initialises a new instance of the <see cref="ExternalCustomerServiceFactory"/> class.
@@ -30,6 +36,10 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     {
         _configuration = configuration;
     }
+
+    #endregion Public Constructors
+
+    #region Public Methods
 
     /// <summary>
     /// Gets an external customer service.
@@ -46,6 +56,10 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
 
         return service;
     }
+
+    #endregion Public Methods
+
+    #region Private Methods
 
     /// <summary>
     /// Gets an instance of an object by its assembly qualified name.
@@ -80,5 +94,5 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
         return instance;
     }
 
-    
+    #endregion Private Methods
 }

@@ -9,13 +9,15 @@ namespace Customer.Data.Access.Repositories.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Customer.Data.Schema;
+using Schema;
 
 /// <summary>
 /// Defines the customer repository contracts.
 /// </summary>
 public interface ICustomerRepository
 {
+    #region Public Methods
+
     /// <summary>
     /// Adds the customer into the DB context.
     /// </summary>
@@ -27,7 +29,7 @@ public interface ICustomerRepository
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>True if can connect. False otherwise.</returns>
-    Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default(CancellationToken));
+    Task<bool> CheckDatabaseConnectionAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Deletes the customer from the DB context.
@@ -47,11 +49,13 @@ public interface ICustomerRepository
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The number of state entries written to the database</returns>
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
+    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Updates the customer into the DB context.
     /// </summary>
     /// <param name="customer">The customer</param>
     void UpdateCustomer(Customer customer);
+
+    #endregion Public Methods
 }

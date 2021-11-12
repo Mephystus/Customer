@@ -14,18 +14,22 @@ using Base;
 /// </summary>
 public class CustomerResponse : CustomerBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the addresses.
     /// </summary>
-    public List<AddressResponse> Addresses { get; set; } = new List<AddressResponse>();
+    public List<AddressResponse> Addresses { get; set; } = new();
 
     /// <summary>
     /// Gets or sets the emails.
     /// </summary>
-    public List<EmailResponse> Emails { get; set; } = new List<EmailResponse>();    
+    public List<EmailResponse> Emails { get; set; } = new();
 
     /// <summary>
     /// Gets or sets the phones.
     /// </summary>
-    public List<PhoneResponse> Phones { get; set; } = new List<PhoneResponse>();
+    public List<PhoneResponse> Phones { get; set; } = new();
+
+    #endregion Public Properties
 }

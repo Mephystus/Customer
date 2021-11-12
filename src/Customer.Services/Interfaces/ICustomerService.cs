@@ -15,12 +15,14 @@ using Models;
 /// </summary>
 public interface ICustomerService
 {
+    #region Public Methods
+
     /// <summary>
     /// Creates a new customer.
     /// </summary>
     /// <param name="customerRequest">The customer request.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    Task<Guid?> CreateCustomerAsync(CustomerRequest customerRequest);
+    Task CreateCustomerAsync(CustomerRequest customerRequest);
 
     /// <summary>
     /// Deletes a customer.
@@ -49,4 +51,6 @@ public interface ICustomerService
     /// <param name="customerRequest">The customer request.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     Task UpdateCustomerAsync(CustomerRequest customerRequest);
+
+    #endregion Public Methods
 }

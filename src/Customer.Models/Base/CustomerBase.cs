@@ -13,6 +13,8 @@ using System;
 /// </summary>
 public abstract class CustomerBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the date of birth.
     /// </summary>
@@ -24,11 +26,6 @@ public abstract class CustomerBase
     public string FirstName { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets the middle name.
-    /// </summary>
-    public string MiddleName {  get; set; } = default!;
-
-    /// <summary>
     /// Gets or sets the customer Id.
     /// </summary>
     public Guid Id { get; set; }
@@ -37,4 +34,11 @@ public abstract class CustomerBase
     /// Gets or sets the last name.
     /// </summary>
     public string LastName { get; set; } = default!;
+
+    /// <summary>
+    /// Gets or sets the middle name.
+    /// </summary>
+    public string MiddleName { get; set; } = default!;
+
+    #endregion Public Properties
 }

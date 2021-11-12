@@ -13,6 +13,8 @@ using System;
 /// </summary>
 public class CustomerRiskResponse
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the customer Id.
     /// </summary>
@@ -27,4 +29,6 @@ public class CustomerRiskResponse
     /// Gets or sets the customer risk indicator.
     /// </summary>
     public string RiskIndicator { get; set; } = default!;
+
+    #endregion Public Properties
 }

@@ -14,6 +14,8 @@ using Base;
 /// </summary>
 public class EmailRequest : EmailBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the customer Id.
     /// </summary>
@@ -23,4 +25,6 @@ public class EmailRequest : EmailBase
     /// Gets or sets the user that created/updated the email.
     /// </summary>
     public string UpdatedBy { get; set; } = default!;
+
+    #endregion Public Properties
 }

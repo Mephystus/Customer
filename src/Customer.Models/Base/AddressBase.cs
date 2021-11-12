@@ -14,6 +14,8 @@ using Enums;
 /// </summary>
 public abstract class AddressBase
 {
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the address line 1.
     /// </summary>
@@ -58,4 +60,6 @@ public abstract class AddressBase
     /// Gets or sets the address type.
     /// </summary>
     public AddressType Type { get; set; }
+
+    #endregion Public Properties
 }

@@ -8,9 +8,9 @@ namespace Customer.Services.Extensions;
 
 using Customer.ExternalServices.Factories.Implementations;
 using Customer.ExternalServices.Factories.Interfaces;
-using Customer.Services.Implementations;
-using Customer.Services.Interfaces;
-using Customer.Services.Mappers;
+using Implementations;
+using Interfaces;
+using Mappers;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -18,6 +18,7 @@ using Microsoft.Extensions.DependencyInjection;
 /// </summary>
 public static class ServiceCollectionExtensions
 {
+    #region Public Methods
 
     /// <summary>
     /// Adds the services auto-mapper configuration into the pipeline.
@@ -43,4 +44,6 @@ public static class ServiceCollectionExtensions
 
         return services;
     }
+
+    #endregion Public Methods
 }

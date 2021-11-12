@@ -7,14 +7,16 @@
 namespace Customer.Data.Access;
 
 using System;
-using Customer.Data.Schema;
 using Microsoft.EntityFrameworkCore;
+using Schema;
 
 /// <summary>
 /// Defines the DB context access layer.
 /// </summary>
 public class CustomerContext : DbContext
 {
+    #region Public Constructors
+
     /// <summary>
     /// Initialises a new instance of the <see cref="CustomerContext"/> class.
     /// </summary>
@@ -23,10 +25,18 @@ public class CustomerContext : DbContext
     {
     }
 
+    #endregion Public Constructors
+
+    #region Public Properties
+
     /// <summary>
     /// Gets or sets the customers.
     /// </summary>
     public DbSet<Customer> Customers => Set<Customer>();
+
+    #endregion Public Properties
+
+    #region Protected Methods
 
     /// <summary>
     /// Use to configure the model in the DB context.
@@ -60,7 +70,9 @@ public class CustomerContext : DbContext
                 DateOfBirth = new DateTime(2005, 11, 9),
                 FirstName = "Flip",
                 MiddleName = "G.",
-                LastName = "Korg"
+                LastName = "Kong"
             });
     }
+
+    #endregion Protected Methods
 }

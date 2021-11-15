@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Interfaces;
 using Models;
 using SharedLibrary.Api.Client;
+using SharedLibrary.Models.Ping;
 
 /// <summary>
 /// Direct implementation of the <see cref="ICustomerApiClient"/>.

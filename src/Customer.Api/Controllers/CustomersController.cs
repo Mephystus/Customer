@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Models;
 using Services.Interfaces;
+using SharedLibrary.Models.Ping;
 using Swashbuckle.AspNetCore.Annotations;
 
 /// <summary>

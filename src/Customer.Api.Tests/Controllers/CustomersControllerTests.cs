@@ -16,6 +16,7 @@ using Models;
 using Models.Enums;
 using NSubstitute;
 using Services.Interfaces;
+using SharedLibrary.Models.Ping;
 using Xunit;
 
 /// <summary>

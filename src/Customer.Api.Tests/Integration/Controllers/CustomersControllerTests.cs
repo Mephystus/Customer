@@ -135,14 +135,14 @@ public class CustomersControllerTests
         var expectedResponse = new ValidationResponse
         {
             StatusCode = StatusCodes.Status400BadRequest,
-            Details = new List<ValidationDetail>
+            Details = new List<ValidationResponseDetail>
             {
-              new ValidationDetail
+              new ValidationResponseDetail
               {
                   FieldName = "FirstName",
                   Message = "'First Name' must not be empty."
               },
-              new ValidationDetail
+              new ValidationResponseDetail
               {
                   FieldName = "DateOfBirth",
                   Message = "Did you came from the future?"
@@ -209,9 +209,9 @@ public class CustomersControllerTests
         var expectedResponse = new ErrorResponse
         {
             StatusCode = StatusCodes.Status404NotFound,
-            Details = new List<ErrorDetail>
+            Details = new List<ErrorResponseDetail>
             {
-              new ErrorDetail
+              new ErrorResponseDetail
               {
                   Message = $"The customer ({customerId}) does not exist."
               }
@@ -285,9 +285,9 @@ public class CustomersControllerTests
         var expectedResponse = new ErrorResponse
         {
             StatusCode = StatusCodes.Status404NotFound,
-            Details = new List<ErrorDetail>
+            Details = new List<ErrorResponseDetail>
             {
-              new ErrorDetail
+              new ErrorResponseDetail
               {
                   Message = $"The customer ({customerId}) does not exist."
               }

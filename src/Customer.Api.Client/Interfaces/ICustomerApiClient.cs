@@ -7,6 +7,7 @@
 namespace Customer.Api.Client.Interfaces;
 
 using Models;
+using SharedLibrary.Models.Ping;
 
 /// <summary>
 /// Provides the contracts for customer API.

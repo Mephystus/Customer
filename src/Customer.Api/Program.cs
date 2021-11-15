@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using SharedLibrary.Api.Extensions;
 using SharedLibrary.Filters.Filters;
@@ -79,7 +80,7 @@ services.AddRouting(options => options.LowercaseUrls = true);
 
 services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new() { Title = "Customer.Api", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Customer.Api", Version = "v1" });
     var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
@@ -90,7 +91,7 @@ var appSettings = builder.Configuration.Get<AppSettings>();
 
 services.AddSingleton(appSettings);
 
-services.AddDbContext(builder.Configuration);
+services.AddDbContext();
 services.AddRepositoriesDependencyInjection();
 services.AddServicesAutoMapper();
 services.AddServicesDependencyInjection();

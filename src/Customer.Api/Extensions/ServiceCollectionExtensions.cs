@@ -6,7 +6,7 @@
 
 namespace Customer.Api.Extensions;
 
-using Customer.Data.Access.HealthChecks;
+using Data.Access.HealthChecks;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>

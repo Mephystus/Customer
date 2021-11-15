@@ -23,7 +23,7 @@ public abstract class CustomerBase
     /// <summary>
     /// Gets or sets the first name.
     /// </summary>
-    public string FirstName { get; set; } = default!;
+    public string FirstName { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the customer Id.
@@ -33,12 +33,12 @@ public abstract class CustomerBase
     /// <summary>
     /// Gets or sets the last name.
     /// </summary>
-    public string LastName { get; set; } = default!;
+    public string LastName { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the middle name.
     /// </summary>
-    public string MiddleName { get; set; } = default!;
+    public string MiddleName { get; set; } = string.Empty;
 
     #endregion Public Properties
 }

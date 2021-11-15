@@ -4,24 +4,24 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Models.Tests;
+namespace Customer.Models.Tests.Validators;
 
 using System;
+using Customer.Models.Validators;
 using FluentValidation;
 using FluentValidation.TestHelper;
 using Models;
-using Validators;
 using Xunit;
 
 /// <summary>
-/// Performs the unit tests associated with customer validation.
+/// Performs the unit tests associated with the <see cref="CustomerRequestValidator"/> class.
 /// </summary>
 public class CustomerRequestValidatorTests
 {
     #region Private Fields
 
     /// <summary>
-    /// The customer request validator.
+    /// The customer request validator (SUT).
     /// </summary>
     private readonly CustomerRequestValidator _sut;
 

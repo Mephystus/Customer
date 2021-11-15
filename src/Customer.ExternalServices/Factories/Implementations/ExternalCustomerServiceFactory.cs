@@ -7,9 +7,9 @@
 namespace Customer.ExternalServices.Factories.Implementations;
 
 using System;
-using Customer.ExternalServices.Factories.Interfaces;
 using Customer.ExternalServices.Interfaces;
-using Customer.Infrastructure.Settings;
+using Infrastructure.Settings;
+using Interfaces;
 using Microsoft.Extensions.Configuration;
 
 /// <summary>
@@ -48,11 +48,11 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     /// <returns>An instance of <see cref="IExternalCustomerService"/></returns>
     public IExternalCustomerService GetExternalCustomerService(string identifier)
     {
-        var appsettings = _configuration.Get<AppSettings>();
+        var appSettings = _configuration.Get<AppSettings>();
 
-        var assemblyName = appsettings.ExternalCustomerServices[identifier];
+        var assemblyName = appSettings.ExternalCustomerServices[identifier];
 
-        IExternalCustomerService service = GetInstance<IExternalCustomerService>(assemblyName);
+        var service = GetInstance<IExternalCustomerService>(assemblyName);
 
         return service;
     }

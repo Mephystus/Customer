@@ -4,16 +4,16 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Models.Tests;
+namespace Customer.Models.Tests.Validators;
 
+using Customer.Models.Validators;
 using FluentValidation;
 using FluentValidation.TestHelper;
 using Models;
-using Validators;
 using Xunit;
 
 /// <summary>
-/// Performs the unit tests associated with email validation.
+/// Performs the unit tests associated with the <see cref="EmailRequestValidator"/> class.
 /// </summary>
 public class EmailRequestValidatorTests
 {

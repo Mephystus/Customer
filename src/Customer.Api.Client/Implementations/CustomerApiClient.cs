@@ -60,7 +60,7 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// <returns>A task that represents the asynchronous operation.</returns>
     public async Task DeleteCustomerAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        await DeleteAsync<object>($"{BaseEndpoint}/{id}", cancellationToken);
+        await DeleteAsync($"{BaseEndpoint}/{id}", cancellationToken);
     }
 
     /// <summary>
@@ -79,9 +79,9 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    public async Task<object> PingAsync(CancellationToken cancellationToken = default)
+    public async Task<PingResponse> PingAsync(CancellationToken cancellationToken = default)
     {
-        return await GetAsync<object>($"{BaseEndpoint}/ping", cancellationToken);
+        return await GetAsync<PingResponse>($"{BaseEndpoint}/ping", cancellationToken);
     }
 
     /// <summary>

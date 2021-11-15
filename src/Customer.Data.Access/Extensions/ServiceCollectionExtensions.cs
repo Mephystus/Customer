@@ -7,7 +7,6 @@
 namespace Customer.Data.Access.Extensions;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories.Implementations;
 using Repositories.Interfaces;
@@ -24,7 +23,7 @@ public static class ServiceCollectionExtensions
     /// </summary>
     /// <param name="services">The service collections.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDbContext(this IServiceCollection services)
     {
         services.AddDbContext<CustomerContext>(options =>
                 options.UseInMemoryDatabase(databaseName: "Mock DB"));

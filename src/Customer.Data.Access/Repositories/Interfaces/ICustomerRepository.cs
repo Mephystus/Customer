@@ -45,7 +45,7 @@ public interface ICustomerRepository
     Task<Customer> GetCustomerAsync(Guid customerId);
 
     /// <summary>
-    /// Saves all changes made into the database.
+    /// Saves all context changes made into the database.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The number of state entries written to the database</returns>

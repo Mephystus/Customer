@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Customer.Data.Access.Repositories.Interfaces;
 using Customer.ExternalServices.Factories.Interfaces;
-using Customer.Models.Base;
 using Data.Schema;
 using Interfaces;
 using Models;
+using Models.Base;
 using SharedLibrary.Exceptions;
 
 /// <summary>
@@ -124,12 +124,9 @@ public class CustomerService : ICustomerService
     /// <returns>The <see cref="CustomerRiskResponse"/></returns>
     public async Task<CustomerRiskResponse> GetCustomerRiskAsync(Guid customerId)
     {
-        var rnd = new Random();
-        var val = rnd.Next(0, 200);
+        var identifier = GetIdentifier(customerId);
 
-        int identifier = val % 2 == 0 ? 1 : (val % 3 == 0 ? 2 : 3);
-
-        var externalCustomerService = _externalCustomerServiceFactory.GetExternalCustomerService(identifier.ToString());
+        var externalCustomerService = _externalCustomerServiceFactory.GetExternalCustomerService(identifier);
 
         var externalRiskResponse = await externalCustomerService.GetCustomerRiskAsync(customerId);
 
@@ -179,6 +176,26 @@ public class CustomerService : ICustomerService
         {
             throw new NotFoundException($"The customer ({customerRequest.Id}) does not exist.");
         }
+    }
+
+    /// <summary>
+    /// Dummy/Stub method to return the identifier based on the customer Id.
+    /// </summary>
+    /// <param name="customerId">The customer Id.</param>
+    /// <returns>The identifier.</returns>
+    private static string GetIdentifier(Guid customerId)
+    {
+        if (customerId.ToString().EndsWith("1"))
+        {
+            return "1";
+        }
+
+        if (customerId.ToString().EndsWith("2"))
+        {
+            return "2";
+        }
+
+        return "3";
     }
 
     #endregion Private Methods

@@ -14,7 +14,7 @@ using Interfaces;
 /// <summary>
 /// The direct implementation for the external services.
 /// </summary>
-public class SpecialExternalCustomerService : IExternalCustomerService
+public class SpecialExternalCustomerService : ExternalCustomerServiceBase, IExternalCustomerService
 {
     #region Public Methods
 
@@ -25,21 +25,9 @@ public class SpecialExternalCustomerService : IExternalCustomerService
     /// <returns>The <see cref="CustomerRiskResponse"/></returns>
     public async Task<CustomerRiskResponse> GetCustomerRiskAsync(Guid customerId)
     {
-        await Task.Delay(1500);
+        await Task.Delay(10);
 
-        var rnd = new Random();
-        var val = rnd.Next(0, 200);
-
-        string riskIndicator = "LOW";
-
-        if (val % 2 == 0)
-        {
-            riskIndicator = "MEDIUM";
-        }
-        else if (val % 3 == 0)
-        {
-            riskIndicator = "HIGH";
-        }
+        var riskIndicator = GetRiskIndicator(customerId);
 
         return new CustomerRiskResponse
         {

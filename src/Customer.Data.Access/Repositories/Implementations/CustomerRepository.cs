@@ -82,7 +82,7 @@ public class CustomerRepository : ICustomerRepository
     }
 
     /// <summary>
-    /// Saves all changes made in this context to the database.
+    /// Saves all context changes made into the database.
     /// </summary>
     /// <param name="cancellationToken">The cancellation token.</param>
     /// <returns>The number of state entries written to the database</returns>

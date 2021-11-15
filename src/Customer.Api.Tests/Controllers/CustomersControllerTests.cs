@@ -4,11 +4,11 @@
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.Api.Tests;
+namespace Customer.Api.Tests.Controllers;
 
 using System;
 using System.Threading.Tasks;
-using Controllers;
+using Customer.Api.Controllers;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,7 +19,7 @@ using Services.Interfaces;
 using Xunit;
 
 /// <summary>
-/// Defines the unit tests associated with the Customer API.
+/// Performs the unit tests associated with the <see cref="CustomersController"/> class.
 /// </summary>
 public class CustomersControllerTests
 {
@@ -29,12 +29,7 @@ public class CustomersControllerTests
     /// The customer service.
     /// </summary>
     private readonly ICustomerService _customerService;
-
-    /// <summary>
-    /// The logger.
-    /// </summary>
-    private readonly ILogger<CustomersController> _logger;
-
+    
     /// <summary>
     /// the System Under Test (Customer Controller)
     /// </summary>
@@ -50,9 +45,9 @@ public class CustomersControllerTests
     public CustomersControllerTests()
     {
         _customerService = Substitute.For<ICustomerService>();
-        _logger = Substitute.For<ILogger<CustomersController>>();
+        ILogger<CustomersController> logger = Substitute.For<ILogger<CustomersController>>();
 
-        _sut = new CustomersController(_logger, _customerService);
+        _sut = new CustomersController(logger, _customerService);
     }
 
     #endregion Public Constructors
@@ -60,7 +55,7 @@ public class CustomersControllerTests
     #region Public Methods
 
     /// <summary>
-    /// Tests the <i>CreateCustomerAsync</i> returning a <see cref="CreatedAtActionResult"/> (201).
+    /// Test the <i>CreateCustomerAsync</i> returning a <see cref="CreatedAtActionResult"/> (201).
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
     [Fact]
@@ -116,15 +111,15 @@ public class CustomersControllerTests
     public async Task GetCustomerAsync_ReturnsOkObjectResult()
     {
         //// Arrange
+        var id = Guid.NewGuid();
+
         var expectedResponse = new CustomerResponse
         {
-            Id = Guid.NewGuid(),
+            Id = id,
             FirstName = "John",
             LastName = "Doe",
             DateOfBirth = DateTime.Today.AddYears(-10)
         };
-
-        var id = Guid.NewGuid();
 
         _customerService.GetCustomerAsync(id).Returns(Task.FromResult(expectedResponse));
 
@@ -193,7 +188,7 @@ public class CustomersControllerTests
     }
 
     /// <summary>
-    /// Tests the <i>UpdateCustomerAsync</i> returning a <see cref="NoContentResult"/> (201).
+    /// Test the <i>UpdateCustomerAsync</i> returning a <see cref="NoContentResult"/> (201).
     /// </summary>
     /// <returns>A task that represents the asynchronous operation.</returns>
     [Fact]

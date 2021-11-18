@@ -1,0 +1,41 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+defaults:
+  run:
+    working-directory: ./src
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    - name: Build
+      run: dotnet build --no-restore --configuration 'Release' -p:GeneratePackageOnBuild=false
+         
+    - name: Create package(s)
+      run: dotnet pack -c 'Release' -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
+            
+    - name: Publish package(s)
+      run: dotnet nuget push --source https://nuget.pkg.github.com/mephystus/index.json --api-key ${GITHUB_TOKEN} **/Customer.Api.Client/bin/Release/*.nupkg
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

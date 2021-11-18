@@ -25,7 +25,7 @@ jobs:
         dotnet-version: 6.0.x
         source-url: https://nuget.pkg.github.com/mephystus/index.json
       env:
-        GITHUB_TOKEN: ${{ secrets.NUGET_PAT }}
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT }}
         
     - name: Authenticate NuGet Feed
       run: nuget sources add -name "private-packages" -source https://nuget.pkg.github.com/mephystus/index.json -StorePasswordInClearText -username Nevermind -password ${GITHUB_TOKEN}

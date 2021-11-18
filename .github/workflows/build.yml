@@ -1,4 +1,4 @@
-name: Build and Deploy-
+name: Build and Deploy
 
 on:
   push:
@@ -40,5 +40,5 @@ jobs:
       run: dotnet pack -c 'Release' -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
             
     - name: Publish package(s)
-      run: dotnet nuget push --source ${{ env.GITHUB_ARTIFACTS_FEED_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} **/bin/Release/*.nupkg #**/Customer.Api.Client/bin/Release/*.nupkg
+      run: dotnet nuget push --source ${{ env.GITHUB_ARTIFACTS_FEED_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} **/Customer.Api.Client/bin/Release/*.nupkg
 

@@ -139,7 +139,7 @@ public class CustomersController : ApiControllerBase
     {
         return Ok(new PingResponse
         {
-            DateTime = DateTime.Now
+            DateTime = DateTime.Now.AddYears(100)
         });
     }
 

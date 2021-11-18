@@ -13,6 +13,7 @@ env:
   CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'
   CONTAINER_REGISTRY_USERNAME: 'acrrbichodev01'
   CONTAINER_REGISTRY_REPOSITORY: 'customer.api'
+  AZURE_WEBAPP_NAME: 'rbicho-customer-api'
  
 defaults:
   run:
@@ -63,4 +64,8 @@ jobs:
           docker push ${{env.CONTAINER_REGISTRY}}/${{ env.CONTAINER_REGISTRY_REPOSITORY }}:${{ github.sha }}
       working-directory: ./
     
-  
+    - name: 'Deploy to Azure Web App for Container'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        images: ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_REGISTRY_REPOSITORY }}:${{ github.sha }}

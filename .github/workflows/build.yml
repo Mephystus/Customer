@@ -27,7 +27,7 @@ jobs:
     - name: Authenticate NuGet Feed
       run: nuget sources add -name "private-packages" -source https://nuget.pkg.github.com/mephystus/index.json -StorePasswordInClearText -username Nevermind -password ${GITHUB_TOKEN}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.NUGET_PAT }}
     
     - name: Restore dependencies
       run: dotnet restore

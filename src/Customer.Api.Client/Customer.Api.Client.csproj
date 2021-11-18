@@ -14,8 +14,8 @@
 		<PackageReference Include="Microsoft.Extensions.Http.Polly" Version="6.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Polly.Extensions.Http" Version="3.0.0" />
-		<PackageReference Include="SharedLibrary.Api.Client" Version="1.1.4" />
-		<PackageReference Include="SharedLibrary.Models" Version="1.1.4" />
+		<PackageReference Include="SharedLibrary.Api.Client" Version="1.1.10" />
+		<PackageReference Include="SharedLibrary.Models" Version="1.1.10" />
 	</ItemGroup>
 
 	<ItemGroup>

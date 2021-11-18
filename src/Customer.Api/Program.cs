@@ -115,7 +115,7 @@ app.UseRouting();
 
 app.UseApiHealthChecks();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

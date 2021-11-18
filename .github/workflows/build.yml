@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  GITHUB_ARTIFACTS_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
+  
 defaults:
   run:
     working-directory: ./src
@@ -23,7 +26,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-        source-url: https://nuget.pkg.github.com/mephystus/index.json
+        source-url: ${{ env.GITHUB_ARTIFACTS_FEED_URL }}
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT }}
             
@@ -37,6 +40,5 @@ jobs:
       run: dotnet pack -c 'Release' -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
             
     - name: Publish package(s)
-      run: dotnet nuget push --source https://nuget.pkg.github.com/mephystus/index.json --api-key ${GITHUB_TOKEN} **/Customer.Api.Client/bin/Release/*.nupkg
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: dotnet nuget push --source ${{ env.GITHUB_ARTIFACTS_FEED_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} **/Customer.Api.Client/bin/Release/*.nupkg
+

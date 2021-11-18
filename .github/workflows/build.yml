@@ -59,8 +59,8 @@ jobs:
       
     - name: Push to Azure Container Registry
       run: |
-          docker build -f docker/Dockerfile . -t ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REGISTRY_REPOSITORY}}:${{ github.sha }}
-          docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REGISTRY_REPOSITORY}}:${{ github.sha }}
+          docker build -f docker/Dockerfile . -t ${{ env.CONTAINER_REGISTRY }}/${{ env.CONTAINER_REGISTRY_REPOSITORY }}:${{ github.sha }}
+          docker push ${{env.CONTAINER_REGISTRY}}/${{ env.CONTAINER_REGISTRY_REPOSITORY }}:${{ github.sha }}
       working-directory: ./
     
   

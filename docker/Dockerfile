@@ -3,5 +3,5 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-COPY .publish/ .
+COPY ./publish/ .
 ENTRYPOINT ["dotnet", "Customer.Api.dll"]

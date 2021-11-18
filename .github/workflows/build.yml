@@ -8,7 +8,12 @@ on:
 
 env:
   GITHUB_ARTIFACTS_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
-  
+  BUILD_CONFIGURATION: 'Release'    
+  DOTNET_VERSION: '6.0.x' 
+  CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'
+  CONTAINER_REGISTRY_USERNAME: 'acrrbichodev01'
+  CONTAINER_REGISTRY_REPOSITORY: 'customer.api'
+ 
 defaults:
   run:
     working-directory: ./src
@@ -34,11 +39,28 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build --no-restore --configuration 'Release' -p:GeneratePackageOnBuild=false
+      run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} -p:GeneratePackageOnBuild=false
          
     - name: Create package(s)
-      run: dotnet pack -c 'Release' -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
+      run: dotnet pack -c ${{ env.BUILD_CONFIGURATION }} -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
             
     - name: Publish package(s)
       run: dotnet nuget push --source ${{ env.GITHUB_ARTIFACTS_FEED_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} **/Customer.Api.Client/bin/Release/*.nupkg
 
+    - name: Publish API
+      run: dotnet publish 'Customer.Api/Customer.Api.csproj' --no-build --configuration '${{ env.BUILD_CONFIGURATION }}' --output './../publish'
+      
+    - name: Login to Azure Container Registry 
+      uses: azure/docker-login@v1
+      with:
+          login-server: ${{ env.CONTAINER_REGISTRY }}
+          username: ${{ env.CONTAINER_REGISTRY }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
+      
+    - name: Push to Azure Container Registry
+      run: |
+          docker build -f docker/Dockerfile . -t ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REGISTRY_REPOSITORY}}:${{ github.sha }}
+          docker push ${{env.CONTAINER_REGISTRY}}/${{env.CONTAINER_REGISTRY_REPOSITORY}}:${{ github.sha }}
+      working-directory: ./
+    
+  

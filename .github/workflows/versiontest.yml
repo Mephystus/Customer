@@ -1,0 +1,40 @@
+name: Build with Versioning
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  GITHUB_ARTIFACTS_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
+  BUILD_CONFIGURATION: 'Release'    
+  DOTNET_VERSION: '6.0.x' 
+  CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'
+  CONTAINER_REGISTRY_USERNAME: 'acrrbichodev01'
+  CONTAINER_REGISTRY_REPOSITORY: 'customer.api'
+  AZURE_WEBAPP_NAME: 'rbicho-customer-api'
+ 
+defaults:
+  run:
+    working-directory: ./src
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        source-url: ${{ env.GITHUB_ARTIFACTS_FEED_URL }}
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT }}
+            
+
+

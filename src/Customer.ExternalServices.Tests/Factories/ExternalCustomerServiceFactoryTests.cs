@@ -6,11 +6,12 @@
 
 namespace Customer.ExternalServices.Tests.Factories;
 
-using System;
-using System.Collections.Generic;
 using Customer.ExternalServices.Factories.Implementations;
 using Customer.ExternalServices.Implementations;
 using Microsoft.Extensions.Configuration;
+using NSubstitute;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 /// <summary>
@@ -18,6 +19,27 @@ using Xunit;
 /// </summary>
 public class ExternalCustomerServiceFactoryTests
 {
+    #region Private Fields
+
+    /// <summary>
+    /// The service provider.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
+
+    #endregion Private Fields
+
+    #region Public Constructors
+
+    /// <summary>
+    /// Initialises a new instance of the <see cref="ExternalCustomerServiceFactoryTests"/> class.
+    /// </summary>
+    public ExternalCustomerServiceFactoryTests()
+    {
+        _serviceProvider = Substitute.For<IServiceProvider>();
+    }
+
+    #endregion Public Constructors
+
     #region Public Methods
 
     /// <summary>
@@ -35,7 +57,7 @@ public class ExternalCustomerServiceFactoryTests
             .AddInMemoryCollection(inMemorySettings)
             .Build();
 
-        var sut = new ExternalCustomerServiceFactory(configuration);
+        var sut = new ExternalCustomerServiceFactory(configuration, _serviceProvider);
 
         //// Act
         void Action(string identifier) { sut.GetExternalCustomerService(identifier); }
@@ -61,7 +83,7 @@ public class ExternalCustomerServiceFactoryTests
             .AddInMemoryCollection(inMemorySettings)
             .Build();
 
-        var sut = new ExternalCustomerServiceFactory(configuration);
+        var sut = new ExternalCustomerServiceFactory(configuration, _serviceProvider);
 
         //// Act
         void Action(string identifier) { sut.GetExternalCustomerService(identifier); }
@@ -87,7 +109,7 @@ public class ExternalCustomerServiceFactoryTests
             .AddInMemoryCollection(inMemorySettings)
             .Build();
 
-        var sut = new ExternalCustomerServiceFactory(configuration);
+        var sut = new ExternalCustomerServiceFactory(configuration, _serviceProvider);
 
         //// Act
         var externalCustomerService = sut.GetExternalCustomerService("1");

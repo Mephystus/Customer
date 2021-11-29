@@ -6,16 +6,28 @@
 
 namespace Customer.ExternalServices.Implementations;
 
-using System;
-using System.Threading.Tasks;
 using Dto;
 using Interfaces;
+using System;
+using System.Threading.Tasks;
 
 /// <summary>
 /// The direct implementation for the external services.
 /// </summary>
 public class SpecialExternalCustomerService : ExternalCustomerServiceBase, IExternalCustomerService
 {
+    #region Public Constructors
+
+    /// <summary>
+    /// Initialises a new instance of the <see cref="SpecialExternalCustomerService"/> class.
+    /// </summary>
+    /// <param name="serviceProvider">An instance of <see cref="IServiceProvider"/></param>
+    public SpecialExternalCustomerService(IServiceProvider serviceProvider)
+    {
+    }
+
+    #endregion Public Constructors
+
     #region Public Methods
 
     /// <summary>

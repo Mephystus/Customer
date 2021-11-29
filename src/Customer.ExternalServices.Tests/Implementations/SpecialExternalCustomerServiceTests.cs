@@ -6,10 +6,11 @@
 
 namespace Customer.ExternalServices.Tests.Implementations;
 
-using System;
-using System.Threading.Tasks;
 using Customer.ExternalServices.Implementations;
 using FluentAssertions;
+using NSubstitute;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 /// <summary>
@@ -18,6 +19,11 @@ using Xunit;
 public class SpecialExternalCustomerServiceTests
 {
     #region Private Fields
+
+    /// <summary>
+    /// The service provider.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
 
     /// <summary>
     /// The "special" external customer service (SUT).
@@ -33,7 +39,8 @@ public class SpecialExternalCustomerServiceTests
     /// </summary>
     public SpecialExternalCustomerServiceTests()
     {
-        _sut = new SpecialExternalCustomerService();
+        _serviceProvider = Substitute.For<IServiceProvider>();
+        _sut = new SpecialExternalCustomerService(_serviceProvider);
     }
 
     #endregion Public Constructors

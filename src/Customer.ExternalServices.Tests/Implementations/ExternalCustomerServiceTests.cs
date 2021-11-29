@@ -10,6 +10,7 @@ using System;
 using System.Threading.Tasks;
 using Customer.ExternalServices.Implementations;
 using FluentAssertions;
+using NSubstitute;
 using Xunit;
 
 /// <summary>
@@ -24,6 +25,11 @@ public class ExternalCustomerServiceTests
     /// </summary>
     private readonly ExternalCustomerService _sut;
 
+    /// <summary>
+    /// The service provider.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
+
     #endregion Private Fields
 
     #region Public Constructors
@@ -33,7 +39,8 @@ public class ExternalCustomerServiceTests
     /// </summary>
     public ExternalCustomerServiceTests()
     {
-        _sut = new ExternalCustomerService();
+        _serviceProvider = Substitute.For<IServiceProvider>();
+        _sut = new ExternalCustomerService(Substitute.For<IServiceProvider>());
     }
 
     #endregion Public Constructors

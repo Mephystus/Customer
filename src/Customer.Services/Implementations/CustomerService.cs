@@ -195,7 +195,12 @@ public class CustomerService : ICustomerService
             return "2";
         }
 
-        return "3";
+        if (customerId.ToString().EndsWith("3"))
+        {
+            return "3";
+        }
+
+        return "4";
     }
 
     #endregion Private Methods

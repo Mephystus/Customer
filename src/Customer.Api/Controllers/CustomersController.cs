@@ -137,9 +137,11 @@ public class CustomersController : ApiControllerBase
     [SwaggerResponse(StatusCodes.Status200OK, "The current date")]
     public IActionResult Ping()
     {
+        _logger.LogInformation("Pinging... ");
+
         return Ok(new PingResponse
         {
-            DateTime = DateTime.Now.AddYears(100)
+            DateTime = DateTime.Now
         });
     }
 

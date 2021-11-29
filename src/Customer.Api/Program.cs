@@ -12,6 +12,7 @@ using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 using Customer.Api.Extensions;
 using Customer.Data.Access.Extensions;
+using Customer.ExternalServices.Demo;
 using Customer.Infrastructure.Settings;
 using Customer.Models.Extensions;
 using Customer.Services.Extensions;
@@ -95,6 +96,7 @@ services.AddDbContext();
 services.AddRepositoriesDependencyInjection();
 services.AddServicesAutoMapper();
 services.AddServicesDependencyInjection();
+services.AddExternalServicesDependencyInjection(appSettings);
 services.AddModelsFluentValidation();
 services.AddApiHealthChecks();
 

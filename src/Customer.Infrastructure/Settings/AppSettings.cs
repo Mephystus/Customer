@@ -16,6 +16,11 @@ public class AppSettings
     #region Public Properties
 
     /// <summary>
+    /// Gets or sets the settings for the 'Demo' customer xternal service;
+    /// </summary>
+    public DemoExternalCustomerService DemoExternalCustomerService { get; set; } = default!;
+
+    /// <summary>
     /// Gets or sets the external customer services.
     /// </summary>
     public Dictionary<string, string> ExternalCustomerServices { get; set; } = new Dictionary<string, string>();

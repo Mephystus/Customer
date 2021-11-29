@@ -24,6 +24,11 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     /// </summary>
     private readonly IConfiguration _configuration;
 
+    /// <summary>
+    /// The service provieder.
+    /// </summary>
+    private readonly IServiceProvider _serviceProvider;
+
     #endregion Private Fields
 
     #region Public Constructors
@@ -32,9 +37,13 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     /// Initialises a new instance of the <see cref="ExternalCustomerServiceFactory"/> class.
     /// </summary>
     /// <param name="configuration">An instance of <see cref="IConfiguration"/>.</param>
-    public ExternalCustomerServiceFactory(IConfiguration configuration)
+    /// <param name="serviceProvider">An instance of <see cref="IServiceProvider"/>.</param>
+    public ExternalCustomerServiceFactory(
+        IConfiguration configuration,
+        IServiceProvider serviceProvider)
     {
         _configuration = configuration;
+        _serviceProvider = serviceProvider;
     }
 
     #endregion Public Constructors
@@ -70,7 +79,7 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     ///     <i>"{namespace}.{class name}, {assembly name}"</i>
     /// </param>
     /// <returns>An instance of <see cref="T"/></returns>
-    private static T GetInstance<T>(string assemblyName) where T : class
+    private   T GetInstance<T>(string assemblyName) where T : class
     {
         if (string.IsNullOrWhiteSpace(assemblyName))
         {
@@ -84,7 +93,7 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
             throw new ArgumentNullException(nameof(objectType));
         }
 
-        var instance = Activator.CreateInstance(objectType) as T;
+        var instance = Activator.CreateInstance(objectType, _serviceProvider) as T;
 
         if (instance == null)
         {

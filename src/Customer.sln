@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.ExternalServices.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Data.Access.Tests", "Customer.Data.Access.Tests\Customer.Data.Access.Tests.csproj", "{FDA88364-6454-4C2D-A485-6B796B4775EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Api.Client.Tests", "Customer.Api.Client.Tests\Customer.Api.Client.Tests.csproj", "{F8C141D1-F3F2-4C72-8A35-1FA18A9D96C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.Api.Client.Tests", "Customer.Api.Client.Tests\Customer.Api.Client.Tests.csproj", "{F8C141D1-F3F2-4C72-8A35-1FA18A9D96C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.ExternalServices.Demo", "Customer.ExternalServices.Demo\Customer.ExternalServices.Demo.csproj", "{3EE0C990-04D6-489A-9F25-AB48C20D9EF5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{F8C141D1-F3F2-4C72-8A35-1FA18A9D96C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8C141D1-F3F2-4C72-8A35-1FA18A9D96C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8C141D1-F3F2-4C72-8A35-1FA18A9D96C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EE0C990-04D6-489A-9F25-AB48C20D9EF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EE0C990-04D6-489A-9F25-AB48C20D9EF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EE0C990-04D6-489A-9F25-AB48C20D9EF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EE0C990-04D6-489A-9F25-AB48C20D9EF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

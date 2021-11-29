@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Customer.Data.Access\Customer.Data.Access.csproj" />
+    <ProjectReference Include="..\Customer.ExternalServices.Demo\Customer.ExternalServices.Demo.csproj" />
     <ProjectReference Include="..\Customer.ExternalServices\Customer.ExternalServices.csproj" />
     <ProjectReference Include="..\Customer.Infrastructure\Customer.Infrastructure.csproj" />
     <ProjectReference Include="..\Customer.Models\Customer.Models.csproj" />

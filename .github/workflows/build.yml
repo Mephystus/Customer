@@ -34,7 +34,7 @@ jobs:
         dotnet-version: 6.0.x
         source-url: ${{ env.GITHUB_ARTIFACTS_FEED_URL }}
       env:
-        NUGET_AUTH_TOKEN: ${{ secrets.NUGET_PAT }}
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
     - name: Restore dependencies
       run: dotnet restore

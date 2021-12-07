@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  GITHUB_PACKAGES_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
+  GITHUB_PACKAGES_FEED_URL: https://nuget.pkg.github.com/mephystuss/index.json
   BUILD_CONFIGURATION: 'Release'    
   DOTNET_VERSION: '6.0.x' 
   CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'

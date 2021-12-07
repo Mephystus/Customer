@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 env:
-  GITHUB_ARTIFACTS_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
+  GITHUB_PACKAGES_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
   BUILD_CONFIGURATION: 'Release'    
   DOTNET_VERSION: '6.0.x' 
   CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'
@@ -32,7 +32,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-        source-url: ${{ env.GITHUB_ARTIFACTS_FEED_URL }}
+        source-url: ${{ env.GITHUB_PACKAGES_FEED_URL }}
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             

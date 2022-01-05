@@ -7,6 +7,7 @@
 namespace Customer.Services.Interfaces;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Models;
 
@@ -44,6 +45,13 @@ public interface ICustomerService
     /// <param name="customerId">The customer Id.</param>
     /// <returns>The <see cref="CustomerRiskResponse"/></returns>
     Task<CustomerRiskResponse> GetCustomerRiskAsync(Guid customerId);
+
+    /// <summary>
+    /// Searches the customers.
+    /// </summary>
+    /// <param name="request">The customer search criteria</param>
+    /// <returns>A list of customers.</returns>
+    Task<List<CustomerResponse>> SearchCustomersAsync(CustomerSearchRequest request);
 
     /// <summary>
     /// Updates an existing customer.

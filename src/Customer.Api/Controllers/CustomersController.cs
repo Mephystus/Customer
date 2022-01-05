@@ -7,6 +7,7 @@
 namespace Customer.Api.Controllers;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -143,6 +144,22 @@ public class CustomersController : ApiControllerBase
         {
             DateTime = DateTime.Now
         });
+    }
+
+    /// <summary>
+    /// Searches the customers.
+    /// </summary>
+    /// <param name="request">The customer search criteria.</param>
+    /// <returns>The customers.</returns>
+    [HttpGet()]
+    [SwaggerResponse(StatusCodes.Status200OK, "The customers", typeof(List<CustomerResponse>))]
+    public async Task<IActionResult> SearchCustomersAsync([FromQuery] CustomerSearchRequest request)
+    {
+        _logger.LogInformation("Input: {@request}", request);
+
+        var response = await _customerService.SearchCustomersAsync(request);
+
+        return Ok(response);
     }
 
     /// <summary>

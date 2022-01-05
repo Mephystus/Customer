@@ -86,6 +86,17 @@ public class CustomerApiClient : ApiClientBase, ICustomerApiClient
     }
 
     /// <summary>
+    /// Searches for customers.
+    /// </summary>
+    /// <param name="request">The search criteria.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    public async Task<List<CustomerResponse>> SearchCustomersAsync(CustomerSearchRequest request, CancellationToken cancellationToken = default)
+    {
+        return await GetAsync<List<CustomerResponse>>($"{BaseEndpoint}/?FistName={request.FistName}&LastName={request.LastName}&MyProperty={request.MyProperty}", cancellationToken);
+    }
+
+    /// <summary>
     /// Updates a customer.
     /// </summary>
     /// <param name="customerRequest">The customer request.</param>

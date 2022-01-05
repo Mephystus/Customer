@@ -48,6 +48,14 @@ public interface ICustomerApiClient
     Task<PingResponse> PingAsync(CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Searches for customers.
+    /// </summary>
+    /// <param name="request">The search criteria.</param>
+    /// <param name="cancellationToken">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    Task<List<CustomerResponse>> SearchCustomersAsync(CustomerSearchRequest request, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Updates a customer.
     /// </summary>
     /// <param name="customerRequest">The customer request.</param>

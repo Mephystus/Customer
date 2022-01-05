@@ -7,6 +7,7 @@
 namespace Customer.Services.Implementations;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Customer.Data.Access.Repositories.Interfaces;
@@ -133,6 +134,34 @@ public class CustomerService : ICustomerService
         var riskResponse = _mapper.Map<CustomerRiskResponse>(externalRiskResponse);
 
         return riskResponse;
+    }
+
+    /// <summary>
+    /// Searches the customers.
+    /// </summary>
+    /// <param name="request">The customer search criteria</param>
+    /// <returns>A list of customers.</returns>
+    public async Task<List<CustomerResponse>> SearchCustomersAsync(CustomerSearchRequest request)
+    {
+        //// TODO: Implementation
+        await Task.Delay(100);
+
+        var response = new List<CustomerResponse> {
+            new CustomerResponse
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Jane",
+                LastName = "Test"
+            },
+            new CustomerResponse
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe"
+            }
+        };
+
+        return response;
     }
 
     /// <summary>

@@ -7,6 +7,7 @@
 namespace Customer.Api.Client.Tests.Implementations;
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Controllers;
 using Customer.Api.Client.Implementations;
@@ -154,6 +155,70 @@ public class CustomerApiClientTests
         Assert.NotNull(response);
 
         Assert.True(response.DateTime != DateTime.MinValue);
+    }
+
+    /// <summary>
+    /// Test the <i>SearchCustomersAsync</i>.
+    /// </summary>
+    /// <returns>A task that represents the asynchronous operation.</returns>
+    [Fact]
+    public async Task SearchCustomersAsync_ReturnsCustomers()
+    {
+        //// Arrange
+        var search = new CustomerSearchRequest
+        {
+            FistName = "J",
+            LastName = "Test",
+            MyProperty = "TEST"
+        };
+
+        var expectedResponse = new List<CustomerResponse>{
+            new CustomerResponse
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Mary",
+                LastName = "Louis",
+                DateOfBirth = DateTime.Today.AddYears(-10)
+            },
+            new CustomerResponse
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "John",
+                LastName = "Doe",
+                DateOfBirth = DateTime.Today.AddYears(-15)
+            },
+            new CustomerResponse
+            {
+                Id = Guid.NewGuid(),
+                FirstName = "Susan",
+                LastName = "Ford",
+                DateOfBirth = DateTime.Today.AddYears(-20)
+            }
+        };
+
+        //_customerService.SearchCustomersAsync(Arg.Any<CustomerSearchRequest>())
+        //                .Returns(Task.FromResult(expectedResponse));
+
+        _customerService.SearchCustomersAsync(Arg.Is<CustomerSearchRequest>(
+                                                x => x.FistName == search.FistName &&
+                                                    x.LastName == search.LastName &&
+                                                    x.MyProperty == search.MyProperty))
+                        .Returns(Task.FromResult(expectedResponse));
+
+        //// Act
+        var actualResponse = await _sut.SearchCustomersAsync(search);
+
+        //// Assert
+        actualResponse.Should().BeEquivalentTo(expectedResponse);
+
+        //await _customerService.Received(1)
+        //                        .SearchCustomersAsync(Arg.Any<CustomerSearchRequest>());
+
+        await _customerService.Received(1)
+                                .SearchCustomersAsync(Arg.Is<CustomerSearchRequest>(
+                                                        x => x.FistName == search.FistName &&
+                                                            x.LastName == search.LastName &&
+                                                            x.MyProperty == search.MyProperty));
     }
 
     /// <summary>

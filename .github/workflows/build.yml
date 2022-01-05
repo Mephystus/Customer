@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Deploy Container
 
 on:
   push:
@@ -7,9 +7,9 @@ on:
     branches: [ main ]
 
 env:
-  GITHUB_ARTIFACTS_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
-  BUILD_CONFIGURATION: 'Release'    
   DOTNET_VERSION: '6.0.x' 
+  GITHUB_PACKAGES_FEED_URL: https://nuget.pkg.github.com/mephystus/index.json
+  BUILD_CONFIGURATION: 'Release'    
   CONTAINER_REGISTRY: 'acrrbichodev01.azurecr.io'
   CONTAINER_REGISTRY_USERNAME: 'acrrbichodev01'
   CONTAINER_REGISTRY_REPOSITORY: 'customer.api'
@@ -31,8 +31,8 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-        source-url: ${{ env.GITHUB_ARTIFACTS_FEED_URL }}
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+        source-url: ${{ env.GITHUB_PACKAGES_FEED_URL }}
       env:
         NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
@@ -43,7 +43,7 @@ jobs:
       run: dotnet build --no-restore --configuration ${{ env.BUILD_CONFIGURATION }} -p:GeneratePackageOnBuild=false
          
     - name: Create package(s)
-      run: dotnet pack -c ${{ env.BUILD_CONFIGURATION }} -p:PackageVersion=1.1.${GITHUB_RUN_NUMBER}
+      run: dotnet pack -c ${{ env.BUILD_CONFIGURATION }} -p:PackageVersion=1.1.1
             
     - name: Publish package(s)
       run: dotnet nuget push --source ${{ env.GITHUB_ARTIFACTS_FEED_URL }} --api-key ${{ secrets.GITHUB_TOKEN }} **/Customer.Api.Client/bin/Release/*.nupkg

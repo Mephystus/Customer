@@ -49,6 +49,7 @@ public class DemoExternalCustomerService : IExternalCustomerService
     {
         var customerIdStr = customerId.ToString();
         var personId = customerIdStr.Substring(customerIdStr.Length - 1);
+        
         var person = await _soapDemoSoap.FindPersonAsync(personId);
 
         var riskIndicator = GetRiskIndicator(person.Age);

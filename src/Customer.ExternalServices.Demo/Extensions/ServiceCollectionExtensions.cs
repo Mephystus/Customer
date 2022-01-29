@@ -6,6 +6,9 @@
 
 namespace Customer.ExternalServices.Demo;
 
+using System.ServiceModel.Description;
+using System.ServiceModel.Dispatcher;
+using Customer.ExternalServices.Demo.Interceptors;
 using Customer.Infrastructure.Settings;
 using DemoServiceReference;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,10 +29,21 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services,
         AppSettings settings)
     {
-        services.AddScoped<SOAPDemoSoap>(
-            x => new SOAPDemoSoapClient(
-                SOAPDemoSoapClient.EndpointConfiguration.SOAPDemoSoap,
-                settings.DemoExternalCustomerService.Endpoint));
+        services.AddScoped<IClientMessageInspector, MessageInspector>();
+        services.AddScoped<IEndpointBehavior, InspectorBehavior>();
+
+        services.AddScoped<SOAPDemoSoap>(serviceProvider =>
+        {
+            var endPointBehavior = serviceProvider.GetRequiredService<IEndpointBehavior>();
+
+            var soapClient = new SOAPDemoSoapClient(
+                    SOAPDemoSoapClient.EndpointConfiguration.SOAPDemoSoap,
+                    settings.DemoExternalCustomerService.Endpoint);
+
+            soapClient.Endpoint.EndpointBehaviors.Add(endPointBehavior);
+
+            return soapClient;
+        });
 
         return services;
     }

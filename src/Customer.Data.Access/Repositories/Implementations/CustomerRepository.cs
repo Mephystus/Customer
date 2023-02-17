@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="CustomerRepository.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomerRepository.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -76,7 +76,7 @@ public class CustomerRepository : ICustomerRepository
     /// </summary>
     /// <param name="customerId">The customer Id.</param>
     /// <returns>The customer.</returns>
-    public async Task<Customer> GetCustomerAsync(Guid customerId)
+    public async Task<Customer?> GetCustomerAsync(Guid customerId)
     {
         return await _context.Customers.FirstOrDefaultAsync(x => x.CustomerId == customerId);
     }

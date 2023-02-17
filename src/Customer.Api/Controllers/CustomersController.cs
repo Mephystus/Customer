@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="CustomersController.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomersController.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -105,6 +105,13 @@ public class CustomersController : ApiControllerBase
         _logger.LogInformation("Input: {@id}", id);
 
         var customer = await _customerService.GetCustomerAsync(id);
+
+        if (customer.FirstName == "John")
+        {
+            var customer3 = await _customerService.GetCustomerAsync(Guid.NewGuid());
+        }
+
+        customer.FirstName = $"Mr. {customer.FirstName}";
 
         _logger.LogInformation("Output: {@customer}", customer);
 

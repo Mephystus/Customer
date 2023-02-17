@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="AppSettings.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="AppSettings.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -16,14 +16,14 @@ public class AppSettings
     #region Public Properties
 
     /// <summary>
-    /// Gets or sets the settings for the 'Demo' customer xternal service;
+    /// Gets or sets the settings for the 'Demo' customer external service;
     /// </summary>
     public DemoExternalCustomerService DemoExternalCustomerService { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets the external customer services.
     /// </summary>
-    public Dictionary<string, string> ExternalCustomerServices { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string> ExternalCustomerServices { get; set; } = new();
 
     #endregion Public Properties
 }

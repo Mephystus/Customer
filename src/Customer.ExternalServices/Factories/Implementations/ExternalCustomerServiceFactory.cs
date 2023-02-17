@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ExternalCustomerServiceFactory.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="ExternalCustomerServiceFactory.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ public class ExternalCustomerServiceFactory : IExternalCustomerServiceFactory
     private readonly IConfiguration _configuration;
 
     /// <summary>
-    /// The service provieder.
+    /// The service provider.
     /// </summary>
     private readonly IServiceProvider _serviceProvider;
 

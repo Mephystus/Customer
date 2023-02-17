@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="HealthChecksTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="HealthChecksTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@ public class HealthChecksTests
             Status = "Healthy",
             Details = new List<HealthCheckDetail>
              {
-                 new HealthCheckDetail
+                 new()
                  {
                      Status = "Healthy",
                      Description = "",

@@ -1,17 +1,17 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ServiceCollectionExtensions.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="ServiceCollectionExtensions.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-namespace Customer.ExternalServices.Demo;
+namespace Customer.ExternalServices.Demo.Extensions;
 
+using DemoServiceReference;
+using Infrastructure.Settings;
+using Interceptors;
+using Microsoft.Extensions.DependencyInjection;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
-using Customer.ExternalServices.Demo.Interceptors;
-using Customer.Infrastructure.Settings;
-using DemoServiceReference;
-using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
 /// Provides extension methods for the services.
@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
     /// Adds the services dependency injection into the pipeline.
     /// </summary>
     /// <param name="services">The service collections.</param>
+    /// <param name="settings">The settings.</param>
     /// <returns>An instance of <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddExternalServicesDependencyInjection(
         this IServiceCollection services,

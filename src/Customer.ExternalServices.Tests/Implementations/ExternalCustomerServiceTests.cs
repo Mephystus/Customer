@@ -1,16 +1,16 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ExternalCustomerServiceTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="ExternalCustomerServiceTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
 namespace Customer.ExternalServices.Tests.Implementations;
 
-using System;
-using System.Threading.Tasks;
 using Customer.ExternalServices.Implementations;
 using FluentAssertions;
 using NSubstitute;
+using System;
+using System.Threading.Tasks;
 using Xunit;
 
 /// <summary>
@@ -25,11 +25,6 @@ public class ExternalCustomerServiceTests
     /// </summary>
     private readonly ExternalCustomerService _sut;
 
-    /// <summary>
-    /// The service provider.
-    /// </summary>
-    private readonly IServiceProvider _serviceProvider;
-
     #endregion Private Fields
 
     #region Public Constructors
@@ -39,7 +34,6 @@ public class ExternalCustomerServiceTests
     /// </summary>
     public ExternalCustomerServiceTests()
     {
-        _serviceProvider = Substitute.For<IServiceProvider>();
         _sut = new ExternalCustomerService(Substitute.For<IServiceProvider>());
     }
 

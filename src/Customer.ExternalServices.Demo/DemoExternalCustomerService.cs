@@ -1,14 +1,14 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="DemoExternalCustomerService.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="DemoExternalCustomerService.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
 namespace Customer.ExternalServices.Demo;
 
-using Customer.ExternalServices.Dto;
-using Customer.ExternalServices.Interfaces;
 using DemoServiceReference;
+using Dto;
+using Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
@@ -49,7 +49,7 @@ public class DemoExternalCustomerService : IExternalCustomerService
     {
         var customerIdStr = customerId.ToString();
         var personId = customerIdStr.Substring(customerIdStr.Length - 1);
-        
+
         var person = await _soapDemoSoap.FindPersonAsync(personId);
 
         var riskIndicator = GetRiskIndicator(person.Age);
@@ -60,8 +60,6 @@ public class DemoExternalCustomerService : IExternalCustomerService
             RiskIndicator = riskIndicator,
             Description = "DEMO description!"
         };
-
-        throw new NotImplementedException();
     }
 
     #endregion Public Methods
@@ -71,7 +69,7 @@ public class DemoExternalCustomerService : IExternalCustomerService
     /// <summary>
     /// Dummy/Stub method to return the risk indicator based on the customer Id.
     /// </summary>
-    /// <param name="customerId"></param>
+    /// <param name="customerAge"></param>
     /// <returns>The risk indicator.</returns>
     protected static string GetRiskIndicator(long customerAge)
     {

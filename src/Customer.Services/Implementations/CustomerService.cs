@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="CustomerService.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomerService.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -147,13 +147,13 @@ public class CustomerService : ICustomerService
         await Task.Delay(100);
 
         var response = new List<CustomerResponse> {
-            new CustomerResponse
+            new()
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Jane",
                 LastName = "Test"
             },
-            new CustomerResponse
+            new()
             {
                 Id = Guid.NewGuid(),
                 FirstName = "John",

@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------------
-//  <copyright file="CustomerApiClientTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomerApiClientTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -173,21 +173,21 @@ public class CustomerApiClientTests
         };
 
         var expectedResponse = new List<CustomerResponse>{
-            new CustomerResponse
+            new()
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Mary",
                 LastName = "Louis",
                 DateOfBirth = DateTime.Today.AddYears(-10)
             },
-            new CustomerResponse
+            new()
             {
                 Id = Guid.NewGuid(),
                 FirstName = "John",
                 LastName = "Doe",
                 DateOfBirth = DateTime.Today.AddYears(-15)
             },
-            new CustomerResponse
+            new()
             {
                 Id = Guid.NewGuid(),
                 FirstName = "Susan",

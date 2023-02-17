@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------------
-//  <copyright file="CustomersControllerTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomersControllerTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -114,21 +114,29 @@ public class CustomersControllerTests
         //// Arrange
         var id = Guid.NewGuid();
 
+        string firstName = "John";
+
         var expectedResponse = new CustomerResponse
         {
             Id = id,
-            FirstName = "John",
+            FirstName = $"Mr. {firstName}",
             LastName = "Doe",
             DateOfBirth = DateTime.Today.AddYears(-10)
         };
 
-        _customerService.GetCustomerAsync(id).Returns(Task.FromResult(expectedResponse));
+        _customerService.GetCustomerAsync(id).Returns(Task.FromResult(new CustomerResponse
+        {
+            Id = expectedResponse.Id,
+            FirstName = firstName,
+            LastName = expectedResponse.LastName,
+            DateOfBirth = expectedResponse.DateOfBirth
+        }));
 
         //// Act
         var response = await _sut.GetCustomerAsync(id);
 
         ////Assert
-        await _customerService.Received(1).GetCustomerAsync(id);
+        await _customerService.Received(2).GetCustomerAsync(id);
 
         Assert.IsType<OkObjectResult>(response);
 

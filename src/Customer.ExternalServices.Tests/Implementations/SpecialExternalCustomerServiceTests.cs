@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="SpecialExternalCustomerServiceTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="SpecialExternalCustomerServiceTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -21,11 +21,6 @@ public class SpecialExternalCustomerServiceTests
     #region Private Fields
 
     /// <summary>
-    /// The service provider.
-    /// </summary>
-    private readonly IServiceProvider _serviceProvider;
-
-    /// <summary>
     /// The "special" external customer service (SUT).
     /// </summary>
     private readonly SpecialExternalCustomerService _sut;
@@ -39,8 +34,7 @@ public class SpecialExternalCustomerServiceTests
     /// </summary>
     public SpecialExternalCustomerServiceTests()
     {
-        _serviceProvider = Substitute.For<IServiceProvider>();
-        _sut = new SpecialExternalCustomerService(_serviceProvider);
+        _sut = new SpecialExternalCustomerService(Substitute.For<IServiceProvider>());
     }
 
     #endregion Public Constructors

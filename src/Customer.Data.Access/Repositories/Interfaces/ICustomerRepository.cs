@@ -1,6 +1,6 @@
 ﻿// -------------------------------------------------------------------------------------
-//  <copyright file="ICustomerRepository.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="ICustomerRepository.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ public interface ICustomerRepository
     /// </summary>
     /// <param name="customerId">The customer Id.</param>
     /// <returns>The customer.</returns>
-    Task<Customer> GetCustomerAsync(Guid customerId);
+    Task<Customer?> GetCustomerAsync(Guid customerId);
 
     /// <summary>
     /// Saves all context changes made into the database.

@@ -1,18 +1,14 @@
 // -------------------------------------------------------------------------------------
-//  <copyright file="Program.cs" company="The AA (Ireland)">
+//  <copyright file="Program.cs" company="{Company Name}">
 //    Copyright (c) The AA (Ireland Test). All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-using System;
-using System.IO;
-using System.Reflection;
-using System.Text.Json.Serialization;
 using App.Metrics.AspNetCore;
 using App.Metrics.Formatters.Prometheus;
 using Customer.Api.Extensions;
 using Customer.Data.Access.Extensions;
-using Customer.ExternalServices.Demo;
+using Customer.ExternalServices.Demo.Extensions;
 using Customer.Infrastructure.Settings;
 using Customer.Models.Extensions;
 using Customer.Services.Extensions;
@@ -25,6 +21,10 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using SharedLibrary.Api.Extensions;
 using SharedLibrary.Filters.Filters;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -117,7 +117,7 @@ app.UseRouting();
 
 app.UseApiHealthChecks();
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

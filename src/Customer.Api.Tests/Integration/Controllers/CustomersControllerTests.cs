@@ -1,16 +1,9 @@
 // -------------------------------------------------------------------------------------
-//  <copyright file="CustomersControllerTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomersControllerTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
 using Customer.Api.Controllers;
 using Customer.Data.Access;
 using Customer.Models;
@@ -22,6 +15,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using SharedLibrary.Models.Models.Error;
 using SharedLibrary.Models.Models.Validation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace Customer.Api.Tests.Integration.Controllers;
@@ -137,12 +137,12 @@ public class CustomersControllerTests
             StatusCode = StatusCodes.Status400BadRequest,
             Details = new List<ValidationResponseDetail>
             {
-              new ValidationResponseDetail
+              new()
               {
                   FieldName = "FirstName",
                   Message = "'First Name' must not be empty."
               },
-              new ValidationResponseDetail
+              new()
               {
                   FieldName = "DateOfBirth",
                   Message = "Did you came from the future?"
@@ -211,7 +211,7 @@ public class CustomersControllerTests
             StatusCode = StatusCodes.Status404NotFound,
             Details = new List<ErrorResponseDetail>
             {
-              new ErrorResponseDetail
+              new()
               {
                   Message = $"The customer ({customerId}) does not exist."
               }
@@ -287,7 +287,7 @@ public class CustomersControllerTests
             StatusCode = StatusCodes.Status404NotFound,
             Details = new List<ErrorResponseDetail>
             {
-              new ErrorResponseDetail
+              new()
               {
                   Message = $"The customer ({customerId}) does not exist."
               }

@@ -1,6 +1,6 @@
 // -------------------------------------------------------------------------------------
-//  <copyright file="CustomerServiceTests.cs" company="The AA (Ireland)">
-//    Copyright (c) The AA (Ireland). All rights reserved.
+//  <copyright file="CustomerServiceTests.cs" company="{Company Name}">
+//    Copyright (c) {Company Name}. All rights reserved.
 //  </copyright>
 // -------------------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ public class CustomerServiceTests
             UpdatedDate = DateTime.UtcNow
         };
 
-        _customerRepository.GetCustomerAsync(customerId).Returns(Task.FromResult(customer));
+        _customerRepository.GetCustomerAsync(customerId)!.Returns(Task.FromResult(customer));
 
         _customerRepository.SaveChangesAsync().Returns(Task.FromResult(1));
 
@@ -227,7 +227,7 @@ public class CustomerServiceTests
         //// Arrange
         var customerId = Guid.NewGuid();
 
-        _customerRepository.GetCustomerAsync(customerId).Returns(Task.FromResult((Customer)null));
+        _customerRepository.GetCustomerAsync(customerId)!.Returns(Task.FromResult((Customer)null!));
 
         _customerRepository.SaveChangesAsync().Returns(Task.FromResult(1));
 
@@ -267,7 +267,7 @@ public class CustomerServiceTests
             UpdatedDate = DateTime.UtcNow
         };
 
-        _customerRepository.GetCustomerAsync(customerId).Returns(Task.FromResult(customer));
+        _customerRepository.GetCustomerAsync(customerId)!.Returns(Task.FromResult(customer));
 
         var expectedResponse = new CustomerResponse
         {
@@ -301,7 +301,7 @@ public class CustomerServiceTests
         //// Arrange
         var customerId = Guid.NewGuid();
 
-        _customerRepository.GetCustomerAsync(customerId).Returns(Task.FromResult((Customer)null));
+        _customerRepository.GetCustomerAsync(customerId)!.Returns(Task.FromResult((Customer)null!));
 
         //// Act
         async Task Action(Guid id) { await _sut.DeleteCustomerAsync(id); }
